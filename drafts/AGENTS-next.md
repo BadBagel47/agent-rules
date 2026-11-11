@@ -117,6 +117,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - Personal data and other sensitive information is only published with explicit approval. The question must explain why it is needed, what it makes easier, and what the risks and consequences are.
 - Secrets (API keys, tokens, passwords) are never committed. Use GitHub Secrets or equivalent and make sure .gitignore covers local secret files.
 - Keys that are public by design (e.g. Firebase web config) may be in the code, but then access rules must protect the data.
+- During inventory, also check branches other than main and the git history for sensitive information (e.g. data that was removed from main but remains on old branches) and flag it.
 - Project-sensitive information: information that must not be easily accessible to the project's own users, e.g. solutions, answers, coordinates or unpublished content. Flag such information when it appears, including in existing code.
 - Briefly describe how the information is exposed, e.g. in a public repo, in source code sent to the browser, in network requests or in git history (anything committed remains even if deleted later).
 - Present the available protection options, with protection level, pros and cons and what is required of the user. Examples: obfuscation (only stops casual guessing), hashing (the answer is checked without being stored in plain text), encryption where the key is provided by the game itself, server-side checking (e.g. Cloudflare Worker) or a private repo.
@@ -125,6 +126,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Inventory checks other branches and history for sensitive information.
   - Recorded user decisions are not raised again; files that only import AGENTS.md are allowed; HANDOFF.md and BACKLOG.md in root or docs/; other documents kept and linked from a documentation map; branches checked against main and grouped; ID conversion shows scope and may be declined.
   - Equivalent existing inventory notes count; adaptation plan items reference related IDs.
   - Adaptation plan with numbered categories and items that can be approved or stopped individually; ID conversion, unmerged branches and found documentation go into the plan.
