@@ -18,6 +18,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
 - Sync with the latest main before starting work and before assigning new IDs.
 - Always read HANDOFF.md at the start of every session.
+- Check which tools, permissions and access the environment has (e.g. push to main, creating workflow files, GitHub API) instead of assuming. Note limitations in HANDOFF.md with the date.
 - If HANDOFF.md is missing, or lacks the line "Inventory: YYYY-MM-DD" (or an equivalent existing note, which is then rewritten to that format without a new inventory): automatically do a thorough inventory of the repo (all branches, open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the line "Inventory: YYYY-MM-DD" and the publishing method in HANDOFF.md. After that, selective reading applies.
 - Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: include moving content that duplicates HANDOFF.md or BACKLOG.md into the new structure, with a mapping between old and new IDs, in the adaptation plan.
 - Include branches with work that was never merged into main in the adaptation plan (merge, keep or delete). First check whether the branch content already exists in main (e.g. squash-merged). Group similar branches into one plan item.
@@ -63,6 +64,8 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 ## DOCUMENTATION
 - Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, and goals and way of working as their own sections) and features and bugs (BACKLOG.md).
 - Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
+- HANDOFF.md describes the current state briefly and must not grow into a log. History belongs in git, changelogs or log documents.
+- If work cannot be finished in the session: record in HANDOFF.md exactly where it stopped and how to continue, and push.
 - Completed items are moved to a done section in BACKLOG.md, not deleted.
 - Priority uses a fixed scale in the documentation: High, Medium, Low.
 - Update documentation in the same commit as the change.
@@ -91,11 +94,11 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
        - D-010 – Design av lobbyn
        - F-007 – Rumskoder för att bjuda in spelare
        - F-009 – Kö när rummet är fullt
-4. Wait for a go-ahead ("Kör" or similar) before making code changes. Documentation (the project's AGENTS.md, HANDOFF.md, BACKLOG.md) may be saved and pushed without a go-ahead.
+4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (the project's AGENTS.md, HANDOFF.md, BACKLOG.md) may be saved and pushed without a go-ahead.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.
 7. Force push, deleting files or rewriting history always requires approval.
-8. Report all IDs with a short status. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site or the commit when available.
+8. Report all IDs with a short status. Never claim more than has been verified: distinguish between changed in code, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site or the commit when available.
 
 ## AUTOMATIC MERGE TO MAIN
 - If the agent can only push to its own branch, the repo must have a GitHub Action (.github/workflows/auto-merge.yml) that, on push to the agent's branches, automatically merges them into main and triggers a new GitHub Pages build if the repo uses Pages.
@@ -113,6 +116,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Short replies, but never leave out important information. No unnecessary technical detail.
 - No running commentary during work, unless something important needs the user's attention.
 - When something unclear affects the result: ask rather than guess.
+- When an ID is mentioned in the chat, always follow it with a short explanation, e.g. "B-012 (buzzern på iPad)". Never just the number.
 
 ## MANUAL STEPS FOR THE USER
 - Give everything needed to complete the step, with direct links where possible.
@@ -136,6 +140,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - From project rules: check tools and permissions at start; HANDOFF.md is current state, not a log; record where unfinished work stopped; a go-ahead covers the approved items; never claim more than verified; IDs in chat always with a short explanation.
   - Terms: global agent rules (övergripande agentregler) and project rules (projektregler). Conflicting project rules are shown with both rules and a recommendation; an approved project rule takes precedence in its repo.
   - Inventory checks other branches and history for sensitive information.
   - Recorded user decisions are not raised again; files that only import AGENTS.md are allowed; HANDOFF.md and BACKLOG.md in root or docs/; other documents kept and linked from a documentation map; branches checked against main and grouped; ID conversion shows scope and may be declined.
