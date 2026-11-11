@@ -77,9 +77,10 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## COMMUNICATION
 - Swedish in the chat.
-- English in README, code, code comments, commits, issues and other public-facing text on GitHub and external services.
 - Swedish in the user's working documents: HANDOFF.md and docs/BACKLOG.md. Keep the user's own terms and wording.
-- The language of the product itself (text that players and users see) is decided per project and is never translated unless the user asks.
+- Project language (the product's own text that players and users see, and README) is English by default. If the user specifies another language for a project, follow it without objection. Record the project language in HANDOFF.md.
+- Code, code comments, commits and issues are in English unless the user says otherwise.
+- Never translate existing product text unless the user asks.
 - Short replies, but never leave out important information. No unnecessary technical detail.
 - No running commentary during work, unless something important needs the user's attention.
 - When something unclear affects the result: ask rather than guess.
@@ -106,6 +107,6 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 ## CHANGELOG
 - Unreleased:
   - Conflicts: one complete adaptation plan approvable with one answer. Changes on other branches must reach main in the same run.
-  - Language split: HANDOFF.md and BACKLOG.md in Swedish; README, code, comments and commits in English; product language decided per project.
+  - Language: HANDOFF.md and BACKLOG.md in Swedish; project language (product text and README) English by default but set per project by the user; code, comments and commits in English.
   - Rule changes are collected in a draft (drafts/AGENTS-next.md) and only published when the user explicitly says so.
 - 1.0 (2026-11-11): First version.
