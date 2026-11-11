@@ -13,7 +13,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Do not copy these rules into the project repo. The project's AGENTS.md only contains a reference to this file. Create it if missing. Project rules and project information go in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with the global agent rules. Content to keep is moved to HANDOFF.md as project rules or project information. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised.
 - On conflicts: change nothing. Instead present a complete adaptation plan (see below) with all changes, including those the rules already require.
-- Decisions recorded in HANDOFF.md (e.g. approved project rules that deviate from the global agent rules, intentionally kept branches, chosen protection for sensitive information) are respected and not raised again. Record new decisions by the user there.
+- Decisions recorded in the "Decisions" section of HANDOFF.md (e.g. approved project rules that deviate from the global agent rules, intentionally kept branches, chosen protection for sensitive information) are respected and not raised again. Record new decisions by the user there. Decisions found elsewhere in the project documentation are copied into that section without asking, since this changes nothing.
 - HANDOFF.md and BACKLOG.md may live in the repo root or in docs/. The project's AGENTS.md states where.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
 - Sync with the latest main before starting work and before assigning new IDs.
@@ -62,7 +62,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Commit and push to main per the normal rules and report the new version.
 
 ## DOCUMENTATION
-- Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, and goals and way of working as their own sections) and features and bugs (BACKLOG.md).
+- Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, decisions, and goals and way of working as their own sections or as links to separate documents) and features and bugs (BACKLOG.md).
 - Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
 - HANDOFF.md describes the current state briefly and must not grow into a log. History belongs in git, changelogs or log documents.
 - If work cannot be finished in the session: record in HANDOFF.md exactly where it stopped and how to continue, and push.
@@ -140,6 +140,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Decisions collected in a "Decisions" section in HANDOFF.md (copied there from other documents without asking); goals and way of working may live in linked separate documents.
   - From project rules: check tools and permissions at start; HANDOFF.md is current state, not a log; record where unfinished work stopped; a go-ahead covers the approved items; never claim more than verified; IDs in chat always with a short explanation.
   - Terms: global agent rules (övergripande agentregler) and project rules (projektregler). Conflicting project rules are shown with both rules and a recommendation; an approved project rule takes precedence in its repo.
   - Inventory checks other branches and history for sensitive information.
