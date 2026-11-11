@@ -7,9 +7,12 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - Confirm in the first reply of every session with one short line which rules version was loaded, e.g. "Regler v1.0 inlästa".
 - Do not copy these rules into the project repo. The project's AGENTS.md only contains a reference to this file. Create it if missing. Project-specific rules and information go in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with these rules and briefly report conflicts. The user decides what to keep. Project-specific content to keep is moved to HANDOFF.md. Change nothing before that.
-- Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches and open PRs, not just main. If found: move the content into the new structure and keep a mapping between old and new IDs.
+- "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
+- Sync with the latest main before starting work and before assigning new IDs.
+- Always read HANDOFF.md at the start of every session.
+- If HANDOFF.md is missing, or lacks a note that an inventory has been done: automatically do a thorough inventory of the repo (all branches, open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the inventory date and the publishing method in HANDOFF.md. After that, selective reading applies.
+- Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: move the content into the new structure and keep a mapping between old and new IDs.
 - Briefly report any branches with work that was never merged into main, and ask whether they should be merged or can be deleted.
-- Always read HANDOFF.md at the start of every session. If missing: create it based on a review of the repo.
 - HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see the changelog), adapt the repo and update the version in HANDOFF.md.
 
 ## UPDATING THE RULES
@@ -26,6 +29,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 ## DOCUMENTATION
 - Keep up to date: HANDOFF.md (current state, next steps, rules version), goals, way of working, and features and bugs (docs/BACKLOG.md).
 - Completed items are moved to a done section in BACKLOG.md, not deleted.
+- Priority uses a fixed scale in the documentation: High, Medium, Low.
 - Update documentation in the same commit as the change.
 - Follow established technical standards and naming conventions.
 - Everything must work regardless of which AI agent takes over.
@@ -60,6 +64,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## AUTOMATIC MERGE TO MAIN
 - If the agent can only push to its own branch, the repo must have a GitHub Action (.github/workflows/auto-merge.yml) that, on push to the agent's branches, automatically merges them into main and triggers a new GitHub Pages build if the repo uses Pages.
+- The agent's own branches must always start with the same prefix as the auto-merge template (claude/), so they are merged automatically.
 - Use the template templates/auto-merge.yml in BadBagel47/agent-rules. Do not write your own variant. Adjust the branch pattern only if the agent uses a different branch prefix than claude/.
 - If missing: add it. If refused (agents often lack permission to create workflow files): give the user ready-made steps with the file name and file content in separate code blocks, so the file can be added manually via github.com once.
 - After pushing, check that the Action run succeeded if possible. Otherwise: mention in the report that it needs checking. A merge that fails due to a conflict is resolved in the next run.
