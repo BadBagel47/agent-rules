@@ -4,6 +4,7 @@ Shared rules for AI coding agents working in BadBagel47's repositories.
 
 - `AGENTS.md` – the current rules (single source of truth)
 - `templates/` – files agents copy into project repos (e.g. `auto-merge.yml`)
+- `drafts/AGENTS-next.md` – collected, not yet published changes (not in effect)
 - `versions/` – archived earlier versions of the rules
 
 Project repos reference the rules with a one-line `AGENTS.md`:
