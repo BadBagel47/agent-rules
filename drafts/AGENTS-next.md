@@ -8,14 +8,16 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
 - Confirm in the first reply of every session with one short line which rules version was loaded, e.g. "Regler v1.0 inlästa".
 - Do not copy these rules into the project repo. The project's AGENTS.md only contains a reference to this file. Create it if missing. Project-specific rules and information go in HANDOFF.md.
-- Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with these rules. Project-specific content to keep is moved to HANDOFF.md.
+- Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with these rules. Project-specific content to keep is moved to HANDOFF.md. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised.
 - On conflicts: change nothing. Instead present a complete adaptation plan (see below) with all changes, including those the rules already require.
+- Decisions recorded in HANDOFF.md (e.g. approved deviations from these rules, intentionally kept branches, chosen protection for sensitive information) are respected and not raised again. Record new decisions by the user there.
+- HANDOFF.md and BACKLOG.md may live in the repo root or in docs/. The project's AGENTS.md states where.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
 - Sync with the latest main before starting work and before assigning new IDs.
 - Always read HANDOFF.md at the start of every session.
 - If HANDOFF.md is missing, or lacks the line "Inventory: YYYY-MM-DD" (or an equivalent existing note, which is then rewritten to that format without a new inventory): automatically do a thorough inventory of the repo (all branches, open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the line "Inventory: YYYY-MM-DD" and the publishing method in HANDOFF.md. After that, selective reading applies.
-- Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: include moving the content into the new structure, with a mapping between old and new IDs, in the adaptation plan.
-- Include branches with work that was never merged into main in the adaptation plan (merge, keep or delete). Branches recorded as intentionally kept in HANDOFF.md are not raised again.
+- Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: include moving content that duplicates HANDOFF.md or BACKLOG.md into the new structure, with a mapping between old and new IDs, in the adaptation plan.
+- Include branches with work that was never merged into main in the adaptation plan (merge, keep or delete). First check whether the branch content already exists in main (e.g. squash-merged). Group similar branches into one plan item.
 - HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see the changelog), adapt the repo and update the version in HANDOFF.md. For a new major version (X): change nothing until the user has approved an adaptation plan.
 
 ## ADAPTATION PLAN
@@ -49,7 +51,8 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - Commit and push to main per the normal rules and report the new version.
 
 ## DOCUMENTATION
-- Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, and goals and way of working as their own sections) and features and bugs (docs/BACKLOG.md).
+- Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, and goals and way of working as their own sections) and features and bugs (BACKLOG.md).
+- Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
 - Completed items are moved to a done section in BACKLOG.md, not deleted.
 - Priority uses a fixed scale in the documentation: High, Medium, Low.
 - Update documentation in the same commit as the change.
@@ -58,7 +61,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## ID SYSTEM
 - If no ID system exists: one shared running number series with prefixes: B-001 bug, F-002 feature, D-003 planning/design. (Not #, since GitHub links #123 to issues.)
-- If a different ID system exists: include its conversion in the adaptation plan. Change nothing without approval.
+- If a different ID system exists: include its conversion in the adaptation plan, stating scope and consequences (number of items, old IDs remaining in commits and documents). If the existing system works, recommend keeping it; the user decides. Change nothing without approval.
 - Include the affected IDs in commit messages.
 
 ## WORKFLOW
@@ -93,7 +96,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## COMMUNICATION
 - Swedish in the chat.
-- The user's working documents (HANDOFF.md and docs/BACKLOG.md) accept both Swedish and English, also mixed. New entries keep the user's own wording and terms in the language the user used. Existing text is never translated.
+- The user's working documents (HANDOFF.md and BACKLOG.md) accept both Swedish and English, also mixed. New entries keep the user's own wording and terms in the language the user used. Existing text is never translated.
 - Project language (the product's own text that players and users see, and README) is English by default. If the user specifies another language for a project, follow it without objection. Record the project language in HANDOFF.md. An existing README in another language is only translated if approved in the adaptation plan.
 - Code, code comments, commits and issues are in English unless the user says otherwise.
 - Never translate existing product text unless the user asks.
@@ -122,7 +125,8 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
-  - Equivalent existing inventory notes count; intentionally kept branches are not raised again; adaptation plan items reference related IDs.
+  - Recorded user decisions are not raised again; files that only import AGENTS.md are allowed; HANDOFF.md and BACKLOG.md in root or docs/; other documents kept and linked from a documentation map; branches checked against main and grouped; ID conversion shows scope and may be declined.
+  - Equivalent existing inventory notes count; adaptation plan items reference related IDs.
   - Adaptation plan with numbered categories and items that can be approved or stopped individually; ID conversion, unmerged branches and found documentation go into the plan.
   - Clarifications: project's AGENTS.md (not the rules) may be pushed without go-ahead; claude/ prefix for all agents; auto-merge conflicts resolved in the same session; fixed "Inventory: YYYY-MM-DD" line; goals and way of working as sections in HANDOFF.md.
   - New major version: adaptation only after the user approves an adaptation plan.
