@@ -123,6 +123,8 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Text to be copied, pasted or searched for goes in its own code block (one per value) so it can be copied with a button.
 - Other information needed for the step is clearly marked but not put in code blocks.
 - Suggest integrations that reduce manual steps, and flag in advance integrations that will be needed.
+- When a manual step will recur, or stops the agent: suggest a one-time action that lets the agent handle the step itself in the future (e.g. a workflow file, a GitHub Secret, a permission, an integration or a network setting). State what is done once, what it saves and any risks. Suggest the least permission needed, and never ask the user to paste keys or passwords into the chat.
+- Record in HANDOFF.md which one-time actions are done, pending or declined, so they are not suggested again needlessly.
 
 ## RESOURCES
 - Conserve quota without sacrificing quality: read selectively instead of the whole repo and avoid unnecessary reruns. Speed is not a priority unless stated otherwise.
@@ -140,6 +142,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Suggest one-time actions that remove recurring manual steps (least permission, no secrets in chat); record done, pending and declined ones in HANDOFF.md.
   - Decisions collected in a "Decisions" section in HANDOFF.md (copied there from other documents without asking); goals and way of working may live in linked separate documents.
   - From project rules: check tools and permissions at start; HANDOFF.md is current state, not a log; record where unfinished work stopped; a go-ahead covers the approved items; never claim more than verified; IDs in chat always with a short explanation.
   - Terms: global agent rules (övergripande agentregler) and project rules (projektregler). Conflicting project rules are shown with both rules and a recommendation; an approved project rule takes precedence in its repo.
