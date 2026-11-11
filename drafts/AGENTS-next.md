@@ -75,7 +75,10 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - After pushing, check that the Action run succeeded if possible. Otherwise: mention in the report that it needs checking. A merge that fails due to a conflict is resolved in the next run.
 
 ## COMMUNICATION
-- Swedish in the chat. English in everything on GitHub and external services (documentation, code comments, commits, issues).
+- Swedish in the chat.
+- English in README, code, code comments, commits, issues and other public-facing text on GitHub and external services.
+- Swedish in the user's working documents: HANDOFF.md and docs/BACKLOG.md. Keep the user's own terms and wording.
+- The language of the product itself (text that players and users see) is decided per project and is never translated unless the user asks.
 - Short replies, but never leave out important information. No unnecessary technical detail.
 - No running commentary during work, unless something important needs the user's attention.
 - When something unclear affects the result: ask rather than guess.
@@ -101,5 +104,6 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Language split: HANDOFF.md and BACKLOG.md in Swedish; README, code, comments and commits in English; product language decided per project.
   - Rule changes are collected in a draft (drafts/AGENTS-next.md) and only published when the user explicitly says so.
 - 1.0 (2026-11-11): First version.
