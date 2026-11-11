@@ -7,6 +7,8 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - Confirm in the first reply of every session with one short line which rules version was loaded, e.g. "Regler v1.0 inlästa".
 - Do not copy these rules into the project repo. The project's AGENTS.md only contains a reference to this file. Create it if missing. Project-specific rules and information go in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with these rules and briefly report conflicts. The user decides what to keep. Project-specific content to keep is moved to HANDOFF.md. Change nothing before that.
+- Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches and open PRs, not just main. If found: move the content into the new structure and keep a mapping between old and new IDs.
+- Briefly report any branches with work that was never merged into main, and ask whether they should be merged or can be deleted.
 - Always read HANDOFF.md at the start of every session. If missing: create it based on a review of the repo.
 - HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see the changelog), adapt the repo and update the version in HANDOFF.md.
 
