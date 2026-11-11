@@ -3,7 +3,7 @@
 Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## ON START
-- This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If it cannot be read: say so immediately.
+- This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
 - Do not copy these rules into the project repo. The project's AGENTS.md only contains a reference to this file. Create it if missing. Project-specific rules and information go in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with these rules and briefly report conflicts. The user decides what to keep. Project-specific content to keep is moved to HANDOFF.md. Change nothing before that.
 - Always read HANDOFF.md at the start of every session. If missing: create it based on a review of the repo.
