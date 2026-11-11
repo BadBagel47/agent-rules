@@ -16,7 +16,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - If HANDOFF.md is missing, or lacks a note that an inventory has been done: automatically do a thorough inventory of the repo (all branches, open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the inventory date and the publishing method in HANDOFF.md. After that, selective reading applies.
 - Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: move the content into the new structure and keep a mapping between old and new IDs.
 - Briefly report any branches with work that was never merged into main, and ask whether they should be merged or can be deleted.
-- HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see the changelog), adapt the repo and update the version in HANDOFF.md.
+- HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see the changelog), adapt the repo and update the version in HANDOFF.md. For a new major version (X): change nothing until the user has approved an adaptation plan, in the same way as for conflicts.
 
 ## UPDATING THE RULES
 - An agent may propose changes to these rules. Changes the user has approved are first collected in the draft drafts/AGENTS-next.md, never directly in AGENTS.md. The draft is never in effect.
@@ -106,6 +106,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - New major version: adaptation only after the user approves an adaptation plan.
   - Conflicts: one complete adaptation plan approvable with one answer. Changes on other branches must reach main in the same run.
   - Language: HANDOFF.md and BACKLOG.md accept Swedish and English without translation; project language (product text and README) English by default but set per project by the user; code, comments and commits in English.
   - Rule changes are collected in a draft (drafts/AGENTS-next.md) and only published when the user explicitly says so.
