@@ -36,11 +36,23 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 1. New bugs, features, planning and design are documented and collected for a combined run. They are not fixed immediately.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
 3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run.
+   - Each proposed run group gets a letter (A, B, C …). Format: a heading line with letter – model and level – short description, and below it one line per ID with a short explanation.
+   - The letters refer to the latest proposal. Save it in BACKLOG.md under "Proposed runs" and replace it when a new proposal is made.
+   - The user may reply e.g. "Kör A", "Kör A och C" or "Kör alla".
+   - Commits and reports use item IDs, not the letters.
+   - Example (written in Swedish in the chat):
+     - **A** – Sonnet, medium – Poäng och tidtagning efter omstart
+       - B-003 – Poängen nollställs inte
+       - B-005 – Tidtagningen startar inte om
+     - **B** – Opus, high – Flerspelarlobby
+       - D-010 – Design av lobbyn
+       - F-007 – Rumskoder för att bjuda in spelare
+       - F-009 – Kö när rummet är fullt
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. Documentation (AGENTS.md, HANDOFF.md, BACKLOG.md) may be saved and pushed without a go-ahead.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below).
 7. Force push, deleting files or rewriting history always requires approval.
-8. Report all IDs with a short status. Incomplete items are listed separately with what is needed to continue. Link to the published site or the commit when available.
+8. Report all IDs with a short status. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site or the commit when available.
 
 ## AUTOMATIC MERGE TO MAIN
 - If the agent can only push to its own branch, the repo must have a GitHub Action (.github/workflows/auto-merge.yml) that, on push to the agent's branches, automatically merges them into main and triggers a new GitHub Pages build if the repo uses Pages.
