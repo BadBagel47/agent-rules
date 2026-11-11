@@ -78,6 +78,8 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
    - The letters refer to the latest proposal. Save it in BACKLOG.md under "Proposed runs" and replace it when a new proposal is made.
    - The user may reply e.g. "Kör A", "Kör A och C" or "Kör alla". Multiple groups are run in priority order; the order does not need to be mentioned in the report.
    - Incomplete items are included in the next proposal once the user has provided what was needed.
+   - After a run: remove the groups that were run from "Proposed runs" in BACKLOG.md and give the remaining groups new letters from A, in priority order.
+   - If approved items turn out to be already done: list them at the top under "Redan klart sedan en tidigare session", without letters, and do not report them as results of the run.
    - Commits and reports use item IDs, not the letters.
    - Example (written in Swedish in the chat):
      - **A** – Sonnet, medium – Poäng och tidtagning efter omstart
@@ -134,6 +136,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Proposed runs updated after each run with remaining groups re-lettered from A; items already done earlier are listed separately, not as run results.
   - Project rules live in the project's AGENTS.md below the reference (existing AGENTS.md files are kept, only duplicates and conflicts removed); tool settings files are left alone; decisions documents and separate bug/feature lists linked from HANDOFF.md count; short log in HANDOFF.md allowed; Swedish priority scale accepted; existing product language is the project language.
   - Removed redundant integration line; merged translation lines; shorter adaptation plan example.
   - Version rule: major only when existing content must be changed, moved or removed; additions are minor.
