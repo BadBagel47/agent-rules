@@ -34,18 +34,11 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Items not run remain as a plan, are saved in HANDOFF.md under "Pending adaptation" and are shown again in the next session.
 - Example (written in Swedish in the chat):
   - **1 – Regelfiler**
-    - 1.1 ⚠️ Ta bort CLAUDE.md och GEMINI.md, som har egna regler (innehållet flyttas först till HANDOFF.md som projektregler)
-    - 1.2 ⚠️ Ersätt AGENTS.md med en hänvisning till de övergripande agentreglerna
-  - **2 – Dokumentation**
-    - 2.1 Lägg till prioritet, klar-sektion och körförslag i BACKLOG.md
-  - **3 – Id-system**
-    - 3.1 ⚠️ Numrera om #347-formatet till B/F/D, med kopplingslista
-  - **4 – Projektregler som krockar med de övergripande agentreglerna**
-    - 4.1 Lösta buggar
-      - Projektregel: raderas vid nästa pass
-      - Övergripande agentregel: flyttas till en klar-sektion
-      - Rekommendation: den övergripande agentregeln (historiken bevaras)
-  - The user replies e.g. "Kör 4.1" (recommendation) or "4.1 projektregel".
+    - 1.1 ⚠️ Ersätt AGENTS.md (egna regler) med en hänvisning; reglerna flyttas till HANDOFF.md som projektregler
+    - 1.2 Lägg till prioritet, klar-sektion och körförslag i BACKLOG.md
+  - **2 – Projektregler som krockar med de övergripande agentreglerna**
+    - 2.1 Lösta buggar – projektregel: raderas; agentregel: flyttas till klar-sektion. Rekommendation: agentregeln (historiken bevaras)
+  - The user replies e.g. "Kör 2.1" (recommendation) or "2.1 projektregel".
 
 ## UPDATING THE RULES
 - An agent may propose changes to these rules. Changes the user has approved are first collected in the draft drafts/AGENTS-next.md, never directly in AGENTS.md. The draft is never in effect.
@@ -110,9 +103,9 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 ## COMMUNICATION
 - Swedish in the chat.
 - The user's working documents (HANDOFF.md and BACKLOG.md) accept both Swedish and English, also mixed. New entries keep the user's own wording and terms in the language the user used. Existing text is never translated.
-- Project language (the product's own text that players and users see, and README) is English by default. If the user specifies another language for a project, follow it without objection. Record the project language in HANDOFF.md. An existing README in another language is only translated if approved in the adaptation plan.
+- Project language (the product's own text that players and users see, and README) is English by default. If the user specifies another language for a project, follow it without objection. Record the project language in HANDOFF.md.
 - Code, code comments, commits and issues are in English unless the user says otherwise.
-- Never translate existing product text unless the user asks.
+- Never translate existing product text or README unless the user asks or approves it in the adaptation plan.
 - Short replies, but never leave out important information. No unnecessary technical detail.
 - No running commentary during work, unless something important needs the user's attention.
 - When something unclear affects the result: ask rather than guess.
@@ -122,7 +115,6 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Give everything needed to complete the step, with direct links where possible.
 - Text to be copied, pasted or searched for goes in its own code block (one per value) so it can be copied with a button.
 - Other information needed for the step is clearly marked but not put in code blocks.
-- Suggest integrations that reduce manual steps, and flag in advance integrations that will be needed.
 - When a manual step will recur, or stops the agent: suggest a one-time action that lets the agent handle the step itself in the future (e.g. a workflow file, a GitHub Secret, a permission, an integration or a network setting). State what is done once, what it saves and any risks. Suggest the least permission needed, and never ask the user to paste keys or passwords into the chat.
 - Record in HANDOFF.md which one-time actions are done, pending or declined, so they are not suggested again needlessly.
 
@@ -142,6 +134,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Removed redundant integration line; merged translation lines; shorter adaptation plan example.
   - Version rule: major only when existing content must be changed, moved or removed; additions are minor.
   - Suggest one-time actions that remove recurring manual steps (least permission, no secrets in chat); record done, pending and declined ones in HANDOFF.md.
   - Decisions collected in a "Decisions" section in HANDOFF.md (copied there from other documents without asking); goals and way of working may live in linked separate documents.
