@@ -38,7 +38,8 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run.
    - Each proposed run group gets a letter (A, B, C …). Format: a heading line with letter – model and level – short description, and below it one line per ID with a short explanation.
    - The letters refer to the latest proposal. Save it in BACKLOG.md under "Proposed runs" and replace it when a new proposal is made.
-   - The user may reply e.g. "Kör A", "Kör A och C" or "Kör alla".
+   - The user may reply e.g. "Kör A", "Kör A och C" or "Kör alla". Multiple groups are run in priority order; the order does not need to be mentioned in the report.
+   - Incomplete items are included in the next proposal once the user has provided what was needed.
    - Commits and reports use item IDs, not the letters.
    - Example (written in Swedish in the chat):
      - **A** – Sonnet, medium – Poäng och tidtagning efter omstart
