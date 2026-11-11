@@ -5,16 +5,16 @@
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
 - **Global agent rules** (Swedish: *övergripande agentregler*): this file. Applies to all repos.
-- **Project rules** (Swedish: *projektregler*): rules that apply to one repo only. They live in that repo's HANDOFF.md.
+- **Project rules** (Swedish: *projektregler*): rules that apply to one repo only. They live in that repo's AGENTS.md, below the reference to this file.
 
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
 - Confirm in the first reply of every session with one short line which rules version was loaded, e.g. "Agentregler v1.1 inlästa".
-- Do not copy these rules into the project repo. The project's AGENTS.md only contains a reference to this file and states where HANDOFF.md and BACKLOG.md are. Create it if missing. Project rules and project information go in HANDOFF.md.
-- Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with the global agent rules. Content to keep is moved to HANDOFF.md as project rules or project information. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised.
+- Do not copy these rules into the project repo. The project's AGENTS.md starts with a reference to this file and states where HANDOFF.md and the backlog are, followed by the project rules. Create it if missing. Project information (current state, decisions etc.) goes in HANDOFF.md.
+- Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist: compare with the global agent rules and move content to keep into the project's AGENTS.md (project rules) or HANDOFF.md (project information). An existing AGENTS.md with its own rules is kept: add the reference at the top and remove only what duplicates or conflicts with the global agent rules. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised. Tool settings files (e.g. .claude/settings.json, .gemini/settings.json) are not rule files and are left alone.
 - On conflicts: change nothing. Instead present a complete adaptation plan (see below) with all changes, including those the rules already require.
-- Decisions recorded in the "Decisions" section of HANDOFF.md (e.g. approved project rules that deviate from the global agent rules, intentionally kept branches, chosen protection for sensitive information) are respected and not raised again. Record new decisions by the user there. Decisions found elsewhere in the project documentation are copied into that section without asking, since this changes nothing.
-- HANDOFF.md and BACKLOG.md may live in the repo root or in docs/.
+- Decisions recorded in the "Decisions" section of HANDOFF.md, or in a decisions document or equivalent existing section linked from HANDOFF.md (e.g. approved project rules that deviate from the global agent rules, intentionally kept branches, chosen protection for sensitive information) are respected and not raised again. Record new decisions by the user there. Decisions found elsewhere and not linked from HANDOFF.md are copied into the Decisions section without asking, since this changes nothing.
+- HANDOFF.md and BACKLOG.md may live in the repo root or in docs/. Separate bug and feature lists (e.g. BUGS.md and FEATURES.md) linked from HANDOFF.md count as the backlog and do not need to be merged.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
 - Sync with the latest main before starting work and before assigning new IDs.
 - Always read HANDOFF.md at the start of every session.
@@ -34,7 +34,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Items not run remain as a plan, are saved in HANDOFF.md under "Pending adaptation" and are shown again in the next session.
 - Example (written in Swedish in the chat):
   - **1 – Regelfiler**
-    - 1.1 ⚠️ Ersätt AGENTS.md (egna regler) med en hänvisning; reglerna flyttas till HANDOFF.md som projektregler
+    - 1.1 ⚠️ Lägg hänvisningen överst i AGENTS.md och ta bort regler som dubblerar agentreglerna; övriga projektregler behålls
     - 1.2 Lägg till prioritet, klar-sektion och körförslag i BACKLOG.md
   - **2 – Projektregler som krockar med de övergripande agentreglerna**
     - 2.1 Lösta buggar – projektregel: raderas; agentregel: flyttas till klar-sektion. Rekommendation: agentregeln (historiken bevaras)
@@ -57,10 +57,10 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 ## DOCUMENTATION
 - Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, decisions, and goals and way of working as their own sections or as links to separate documents) and features and bugs (BACKLOG.md).
 - Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
-- HANDOFF.md describes the current state briefly and must not grow into a log. History belongs in git, changelogs or log documents.
+- HANDOFF.md describes the current state briefly and must not grow into a log. A short list of the latest entries (about five) is fine; older history belongs in git, changelogs or log documents.
 - If work cannot be finished in the session: record in HANDOFF.md exactly where it stopped and how to continue, and push.
 - Completed items are moved to a done section in BACKLOG.md, not deleted.
-- Priority uses a fixed scale in the documentation: High, Medium, Low.
+- Priority uses a fixed scale in the documentation: High, Medium, Low (or the Swedish Hög, Medel, Låg).
 - Update documentation in the same commit as the change.
 - Follow established technical standards and naming conventions.
 - Everything must work regardless of which AI agent takes over.
@@ -103,7 +103,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 ## COMMUNICATION
 - Swedish in the chat.
 - The user's working documents (HANDOFF.md and BACKLOG.md) accept both Swedish and English, also mixed. New entries keep the user's own wording and terms in the language the user used. Existing text is never translated.
-- Project language (the product's own text that players and users see, and README) is English by default. If the user specifies another language for a project, follow it without objection. Record the project language in HANDOFF.md.
+- Project language (the product's own text that players and users see, and README) is English by default for new projects. For existing projects, the language of the existing product text is the project language unless the user says otherwise. If the user specifies another language for a project, follow it without objection. Record the project language in HANDOFF.md.
 - Code, code comments, commits and issues are in English unless the user says otherwise.
 - Never translate existing product text or README unless the user asks or approves it in the adaptation plan.
 - Short replies, but never leave out important information. No unnecessary technical detail.
@@ -134,6 +134,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Project rules live in the project's AGENTS.md below the reference (existing AGENTS.md files are kept, only duplicates and conflicts removed); tool settings files are left alone; decisions documents and separate bug/feature lists linked from HANDOFF.md count; short log in HANDOFF.md allowed; Swedish priority scale accepted; existing product language is the project language.
   - Removed redundant integration line; merged translation lines; shorter adaptation plan example.
   - Version rule: major only when existing content must be changed, moved or removed; additions are minor.
   - Suggest one-time actions that remove recurring manual steps (least permission, no secrets in chat); record done, pending and declined ones in HANDOFF.md.
