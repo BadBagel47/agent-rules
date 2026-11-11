@@ -8,7 +8,8 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
 - Confirm in the first reply of every session with one short line which rules version was loaded, e.g. "Regler v1.0 inlästa".
 - Do not copy these rules into the project repo. The project's AGENTS.md only contains a reference to this file. Create it if missing. Project-specific rules and information go in HANDOFF.md.
-- Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with these rules and briefly report conflicts. The user decides what to keep. Project-specific content to keep is moved to HANDOFF.md. Change nothing before that.
+- Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist, or an AGENTS.md with its own rules: compare with these rules. Project-specific content to keep is moved to HANDOFF.md.
+- On conflicts: change nothing. Instead present a complete adaptation plan with all changes, including those the rules already require. Clearly mark anything that deletes or overwrites something. The plan must be approvable with one answer, e.g. "Kör anpassning", or adjustable point by point.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
 - Sync with the latest main before starting work and before assigning new IDs.
 - Always read HANDOFF.md at the start of every session.
@@ -63,7 +64,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
        - F-009 – Kö när rummet är fullt
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. Documentation (AGENTS.md, HANDOFF.md, BACKLOG.md) may be saved and pushed without a go-ahead.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
-6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below).
+6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.
 7. Force push, deleting files or rewriting history always requires approval.
 8. Report all IDs with a short status. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site or the commit when available.
 
@@ -104,6 +105,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Conflicts: one complete adaptation plan approvable with one answer. Changes on other branches must reach main in the same run.
   - Language split: HANDOFF.md and BACKLOG.md in Swedish; README, code, comments and commits in English; product language decided per project.
   - Rule changes are collected in a draft (drafts/AGENTS-next.md) and only published when the user explicitly says so.
 - 1.0 (2026-11-11): First version.
