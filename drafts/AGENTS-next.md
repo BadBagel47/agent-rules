@@ -13,14 +13,15 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
 - Sync with the latest main before starting work and before assigning new IDs.
 - Always read HANDOFF.md at the start of every session.
-- If HANDOFF.md is missing, or lacks the line "Inventory: YYYY-MM-DD": automatically do a thorough inventory of the repo (all branches, open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the line "Inventory: YYYY-MM-DD" and the publishing method in HANDOFF.md. After that, selective reading applies.
+- If HANDOFF.md is missing, or lacks the line "Inventory: YYYY-MM-DD" (or an equivalent existing note, which is then rewritten to that format without a new inventory): automatically do a thorough inventory of the repo (all branches, open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the line "Inventory: YYYY-MM-DD" and the publishing method in HANDOFF.md. After that, selective reading applies.
 - Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: include moving the content into the new structure, with a mapping between old and new IDs, in the adaptation plan.
-- Include branches with work that was never merged into main in the adaptation plan (merge or delete).
+- Include branches with work that was never merged into main in the adaptation plan (merge, keep or delete). Branches recorded as intentionally kept in HANDOFF.md are not raised again.
 - HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see the changelog), adapt the repo and update the version in HANDOFF.md. For a new major version (X): change nothing until the user has approved an adaptation plan.
 
 ## ADAPTATION PLAN
 - Used on conflicts, for a new major version, and for anything during setup that needs approval (e.g. ID conversion, unmerged branches, moving found documentation, translating an existing README).
 - Changes are grouped into numbered categories (1, 2, 3 …) with numbered items (1.1, 1.2 …). Numbers, not letters, so the plan is not confused with run groups.
+- Items related to backlog items state their IDs, and approved items mark those IDs as done where applicable.
 - Mark every item that deletes or overwrites something with ⚠️ and explain the marking once below the plan.
 - The user may approve all, a category or single items, e.g. "Kör anpassning", "Kör 1 och 2", "Kör allt utom 3", "Kör 4, stoppa 4.2".
 - Items not run remain as a plan, are saved in HANDOFF.md under "Pending adaptation" and are shown again in the next session.
@@ -121,6 +122,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Equivalent existing inventory notes count; intentionally kept branches are not raised again; adaptation plan items reference related IDs.
   - Adaptation plan with numbered categories and items that can be approved or stopped individually; ID conversion, unmerged branches and found documentation go into the plan.
   - Clarifications: project's AGENTS.md (not the rules) may be pushed without go-ahead; claude/ prefix for all agents; auto-merge conflicts resolved in the same session; fixed "Inventory: YYYY-MM-DD" line; goals and way of working as sections in HANDOFF.md.
   - New major version: adaptation only after the user approves an adaptation plan.
