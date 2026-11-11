@@ -42,7 +42,7 @@ Shared rules for all AI agents working in the user's GitHub repositories.
 ## WORKFLOW
 1. New bugs, features, planning and design are documented and collected for a combined run. They are not fixed immediately.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
-3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run.
+3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run. Only suggest models and levels available in the agent's own environment, which the user can select there, never models from other providers.
    - Each proposed run group gets a letter (A, B, C …). Format: a heading line with letter – model and level – short description, and below it one line per ID with a short explanation.
    - The letters refer to the latest proposal. Save it in BACKLOG.md under "Proposed runs" and replace it when a new proposal is made.
    - The user may reply e.g. "Kör A", "Kör A och C" or "Kör alla". Multiple groups are run in priority order; the order does not need to be mentioned in the report.
