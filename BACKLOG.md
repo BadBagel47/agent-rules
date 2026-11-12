@@ -10,7 +10,8 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| – | – | No open proposals | – |
+| F-004 | Förslag | Safety principle at the top of the rules, taking precedence over everything else: nothing the agent does may be lost. Everything removed or overwritten must be recoverable (e.g. via git history, or a tag before a branch is deleted). What cannot be recovered (rewritten history, data in external services such as databases, DNS or hosting) requires an explicit yes for that specific action. If an answer is unclear, the agent always chooses the safest option. | User, 2026-11-12 |
+| B-005 | Förslag | Contradiction: "on conflicts: change nothing" vs "minor versions are adapted directly". Clarify: on conflicts, what the rules require and that does not delete, overwrite or depend on anything in the plan is done directly; everything else waits for the adaptation plan. | bricks report, 2026-11-12 |
 
 ## Published / declined
 
