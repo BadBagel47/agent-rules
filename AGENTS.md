@@ -1,4 +1,4 @@
-# AGENT RULES, version 1.2 (2026-11-12)
+# AGENT RULES, version 1.3 (2026-11-12)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
@@ -6,12 +6,17 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - **Project rules** (Swedish: *projektregler*): rules that apply to one repo only. They live in that repo's AGENTS.md, below the reference to this file. Existing project rules in HANDOFF.md may stay there if the project's AGENTS.md links to them.
 - **Exception – the agent-rules repo itself:** in BadBagel47/agent-rules, AGENTS.md is the global agent rules, BACKLOG.md is the backlog and UPDATING THE RULES is the workflow. The ON START steps for project repos (reference, HANDOFF.md, inventory, adaptation) do not apply there.
 
+## SAFETY PRINCIPLE (takes precedence over everything else)
+- Nothing the agent does may be lost. Everything that is removed or overwritten must be recoverable (e.g. via git history, or a tag before a branch is deleted).
+- What cannot be recovered (e.g. rewritten history, data in external services such as databases, DNS or hosting) requires an explicit yes from the user for that specific action.
+- If an answer from the user is unclear, always choose the safest option.
+
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
-- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.2 inlästa (repot följde tidigare v1.1)", "(repot följer redan v1.2)" or "(repot har inte följt agentreglerna tidigare)".
+- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.3 inlästa (repot följde tidigare v1.2)", "(repot följer redan v1.3)" or "(repot har inte följt agentreglerna tidigare)".
 - Do not copy these rules into the project repo. The project's AGENTS.md starts with a reference to this file and states where HANDOFF.md and the backlog are, followed by the project rules. Create it if missing. Project information (current state, decisions etc.) goes in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist: compare with the global agent rules and move content to keep into the project's AGENTS.md (project rules) or HANDOFF.md (project information). An existing AGENTS.md with its own rules is kept: add the reference at the top and remove only what duplicates or conflicts with the global agent rules. Project rules that are more specific than the global agent rules are kept. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised. Tool settings files (e.g. .claude/settings.json, .gemini/settings.json) are not rule files and are left alone.
-- On conflicts: change nothing. Instead present a complete adaptation plan (see below) with all changes, including those the rules already require.
+- On conflicts: what the rules require and that does not delete, overwrite or depend on anything in the plan is done directly. Everything else waits for a complete adaptation plan (see below).
 - Decisions recorded in the "Decisions" section of HANDOFF.md, or in a decisions document or equivalent existing section linked from HANDOFF.md or the project's AGENTS.md (e.g. approved project rules that deviate from the global agent rules, intentionally kept branches, chosen protection for sensitive information) are respected and not raised again. Record new decisions by the user there. Decisions found elsewhere and not linked from either are copied into the Decisions section without asking, since this changes nothing.
 - HANDOFF.md and BACKLOG.md may live in the repo root or in docs/. Separate bug and feature lists (e.g. BUGS.md and FEATURES.md) linked from HANDOFF.md or the project's AGENTS.md count as the backlog and do not need to be merged.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
@@ -147,6 +152,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - The inventory includes a brief review of this. Findings go into the backlog.
 
 ## CHANGELOG
+- 1.3 (2026-11-12): Safety principle at the top: nothing may be lost, irreversible actions need an explicit yes, unclear answers mean the safest option (F-004). On conflicts, safe and independent changes required by the rules are done directly; the rest waits for the adaptation plan (B-005).
 - 1.2 (2026-11-12): Exception for the agent-rules repo itself (B-003); the confirmation line also states the version the repo followed before (F-002); adaptation plan items are referred to as "punkt 1.1" in the chat (F-001).
 - 1.1 (2026-11-12):
   - Terms: global agent rules and project rules. Project rules live in the project's AGENTS.md below the reference (existing ones in HANDOFF.md may stay if linked); more specific project rules are kept; changes to them need approval.
