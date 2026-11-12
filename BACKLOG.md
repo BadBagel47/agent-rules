@@ -10,11 +10,12 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| F-001 | I utkast | Refer to adaptation plan items as "punkt 1.1" in the chat, so they are not confused with rules versions or product versions (e.g. "1.1 (automatiska versioner)" next to rules v1.1 and module v0.2.0). | geo-kit report, 2026-11-12 |
-| F-002 | I utkast | The confirmation line also states the rules version the repo followed before, e.g. "Agentregler v1.1 inlästa (repot följde tidigare v1.0)", "(repot följer redan v1.1)" or "(repot har inte följt agentreglerna tidigare)". | User, 2026-11-12 |
-| B-003 | I utkast | The rules do not cover the agent-rules repo itself: its AGENTS.md is the global rules, so an agent there would try to add a reference to itself, create HANDOFF.md, run an inventory etc. Add an exception: in agent-rules, AGENTS.md is the rules, BACKLOG.md is the backlog and UPDATING THE RULES is the workflow. | Self-check, 2026-11-12 |
+| – | – | No open proposals | – |
 
 ## Published / declined
 
 | ID | Status | Version | Description |
 |---|---|---|---|
+| F-001 | Publicerad | 1.2 | Refer to adaptation plan items as "punkt 1.1" in the chat, so they are not confused with rules versions or product versions (e.g. "1.1 (automatiska versioner)" next to rules v1.1 and module v0.2.0). |
+| F-002 | Publicerad | 1.2 | The confirmation line also states the rules version the repo followed before, e.g. "Agentregler v1.1 inlästa (repot följde tidigare v1.0)", "(repot följer redan v1.1)" or "(repot har inte följt agentreglerna tidigare)". |
+| B-003 | Publicerad | 1.2 | The rules do not cover the agent-rules repo itself: its AGENTS.md is the global rules, so an agent there would try to add a reference to itself, create HANDOFF.md, run an inventory etc. Add an exception: in agent-rules, AGENTS.md is the rules, BACKLOG.md is the backlog and UPDATING THE RULES is the workflow. |
