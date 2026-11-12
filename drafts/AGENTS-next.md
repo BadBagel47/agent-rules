@@ -5,29 +5,29 @@
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
 - **Global agent rules** (Swedish: *övergripande agentregler*): this file. Applies to all repos.
-- **Project rules** (Swedish: *projektregler*): rules that apply to one repo only. They live in that repo's AGENTS.md, below the reference to this file.
+- **Project rules** (Swedish: *projektregler*): rules that apply to one repo only. They live in that repo's AGENTS.md, below the reference to this file. Existing project rules in HANDOFF.md may stay there if the project's AGENTS.md links to them.
 
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
 - Confirm in the first reply of every session with one short line which rules version was loaded, e.g. "Agentregler v1.1 inlästa".
 - Do not copy these rules into the project repo. The project's AGENTS.md starts with a reference to this file and states where HANDOFF.md and the backlog are, followed by the project rules. Create it if missing. Project information (current state, decisions etc.) goes in HANDOFF.md.
-- Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist: compare with the global agent rules and move content to keep into the project's AGENTS.md (project rules) or HANDOFF.md (project information). An existing AGENTS.md with its own rules is kept: add the reference at the top and remove only what duplicates or conflicts with the global agent rules. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised. Tool settings files (e.g. .claude/settings.json, .gemini/settings.json) are not rule files and are left alone.
+- Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist: compare with the global agent rules and move content to keep into the project's AGENTS.md (project rules) or HANDOFF.md (project information). An existing AGENTS.md with its own rules is kept: add the reference at the top and remove only what duplicates or conflicts with the global agent rules. Project rules that are more specific than the global agent rules are kept. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised. Tool settings files (e.g. .claude/settings.json, .gemini/settings.json) are not rule files and are left alone.
 - On conflicts: change nothing. Instead present a complete adaptation plan (see below) with all changes, including those the rules already require.
-- Decisions recorded in the "Decisions" section of HANDOFF.md, or in a decisions document or equivalent existing section linked from HANDOFF.md (e.g. approved project rules that deviate from the global agent rules, intentionally kept branches, chosen protection for sensitive information) are respected and not raised again. Record new decisions by the user there. Decisions found elsewhere and not linked from HANDOFF.md are copied into the Decisions section without asking, since this changes nothing.
-- HANDOFF.md and BACKLOG.md may live in the repo root or in docs/. Separate bug and feature lists (e.g. BUGS.md and FEATURES.md) linked from HANDOFF.md count as the backlog and do not need to be merged.
+- Decisions recorded in the "Decisions" section of HANDOFF.md, or in a decisions document or equivalent existing section linked from HANDOFF.md or the project's AGENTS.md (e.g. approved project rules that deviate from the global agent rules, intentionally kept branches, chosen protection for sensitive information) are respected and not raised again. Record new decisions by the user there. Decisions found elsewhere and not linked from either are copied into the Decisions section without asking, since this changes nothing.
+- HANDOFF.md and BACKLOG.md may live in the repo root or in docs/. Separate bug and feature lists (e.g. BUGS.md and FEATURES.md) linked from HANDOFF.md or the project's AGENTS.md count as the backlog and do not need to be merged.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
 - Sync with the latest main before starting work and before assigning new IDs.
 - Always read HANDOFF.md at the start of every session.
 - Check which tools, permissions and access the environment has (e.g. push to main, creating workflow files, GitHub API) instead of assuming. Note limitations in HANDOFF.md with the date.
 - If HANDOFF.md is missing, or lacks the line "Inventory: YYYY-MM-DD" (or an equivalent existing note, which is then rewritten to that format without a new inventory): automatically do a thorough inventory of the repo (all branches, open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the line "Inventory: YYYY-MM-DD" and the publishing method in HANDOFF.md. After that, selective reading applies.
 - Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: include moving content that duplicates HANDOFF.md or BACKLOG.md into the new structure, with a mapping between old and new IDs, in the adaptation plan.
-- Include branches with work that was never merged into main in the adaptation plan (merge, keep or delete). First check whether the branch content already exists in main (e.g. squash-merged). Group similar branches into one plan item.
+- Include branches with work that was never merged into main in the adaptation plan (merge, keep or delete). First check whether the branch content already exists in main (e.g. squash-merged), using enough history (not a shallow clone) for the comparison. Group similar branches into one plan item.
 - HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see the changelog), adapt the repo and update the version in HANDOFF.md. For a new major version (X): change nothing until the user has approved an adaptation plan.
 
 ## ADAPTATION PLAN
 - Used on conflicts, for a new major version, and for anything during setup that needs approval (e.g. ID conversion, unmerged branches, moving found documentation, translating an existing README).
 - Changes are grouped into numbered categories (1, 2, 3 …) with numbered items (1.1, 1.2 …). Numbers, not letters, so the plan is not confused with run groups.
-- Project rules that conflict with the global agent rules are shown with both rules and a recommendation. Approving the item means the recommendation applies; otherwise the user's choice applies. The choice is recorded as a decision in HANDOFF.md, and an approved project rule then takes precedence over the global agent rule in that repo.
+- Project rules that conflict with the global agent rules are shown with both rules and a recommendation. Approving the item means the recommendation applies; otherwise the user's choice applies. The choice is recorded as a decision in HANDOFF.md and the rule text is written in the project's AGENTS.md; an approved project rule then takes precedence over the global agent rule in that repo.
 - Items related to backlog items state their IDs, and approved items mark those IDs as done where applicable.
 - Mark every item that deletes or overwrites something with ⚠️ and explain the marking once below the plan.
 - The user may approve all, a category or single items, e.g. "Kör anpassning", "Kör 1 och 2", "Kör allt utom 3", "Kör 4, stoppa 4.2".
@@ -56,7 +56,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## DOCUMENTATION
 - Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, decisions, and goals and way of working as their own sections or as links to separate documents) and features and bugs (BACKLOG.md).
-- Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
+- Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md or the project's AGENTS.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
 - HANDOFF.md describes the current state briefly and must not grow into a log. A short list of the latest entries (about five) is fine; older history belongs in git, changelogs or log documents.
 - If work cannot be finished in the session: record in HANDOFF.md exactly where it stopped and how to continue, and push.
 - Completed items are moved to a done section in BACKLOG.md, not deleted.
@@ -75,28 +75,32 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
 3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run. Only suggest models and levels available in the agent's own environment, which the user can select there, never models from other providers.
    - Each proposed run group gets a letter (A, B, C …). Format: a heading line with letter – model and level – short description, and below it one line per ID with a short explanation.
-   - The letters refer to the latest proposal. Save it in BACKLOG.md under "Proposed runs" and replace it when a new proposal is made.
-   - The user may reply e.g. "Kör A", "Kör A och C" or "Kör alla". Multiple groups are run in priority order; the order does not need to be mentioned in the report.
+   - The letters refer to the latest proposal. Save it under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made.
+   - In the saved proposal, state a neutral model level (e.g. strong or standard model, high or medium level), since different agents read it. In the chat, the agent names its own models.
+   - The user may reply e.g. "Kör A", "Kör A och C", "Kör alla" or "Kör alla med <modell>". Multiple groups are run in priority order; the order does not need to be mentioned in the report.
    - Incomplete items are included in the next proposal once the user has provided what was needed.
-   - After a run: remove the groups that were run from "Proposed runs" in BACKLOG.md and give the remaining groups new letters from A, in priority order.
+   - After a run: remove the groups that were run from "Proposed runs" and give the remaining groups new letters from A, in priority order.
    - If approved items turn out to be already done: list them at the top under "Redan klart sedan en tidigare session", without letters, and do not report them as results of the run.
+   - Items the user has set aside for later get the status "Parkerad" in the backlog. They are not part of the proposal but are listed briefly under "Parkerat" after it.
+   - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups in the current proposal, never parked items. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
    - Commits and reports use item IDs, not the letters.
    - Example (written in Swedish in the chat):
-     - **A** – Sonnet, medium – Poäng och tidtagning efter omstart
+     - **A** – <modell>, <nivå> – Poäng och tidtagning efter omstart
        - B-003 – Poängen nollställs inte
        - B-005 – Tidtagningen startar inte om
-     - **B** – Opus, high – Flerspelarlobby
+     - **B** – <modell>, <nivå> – Flerspelarlobby
        - D-010 – Design av lobbyn
        - F-007 – Rumskoder för att bjuda in spelare
        - F-009 – Kö när rummet är fullt
-4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (the project's AGENTS.md, HANDOFF.md, BACKLOG.md) may be saved and pushed without a go-ahead.
+4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.
 7. Force push, deleting files or rewriting history always requires approval.
 8. Report all IDs with a short status. Never claim more than has been verified: distinguish between changed in code, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site or the commit when available.
 
 ## AUTOMATIC MERGE TO MAIN
-- If the agent can only push to its own branch, the repo must have a GitHub Action (.github/workflows/auto-merge.yml) that, on push to the agent's branches, automatically merges them into main and triggers a new GitHub Pages build if the repo uses Pages.
+- Do not add automatic merge if the project rules require review before main (e.g. a pull request approved by the user); then open a pull request and give the user a direct link to it.
+- Otherwise, if the agent can only push to its own branch, the repo must have a GitHub Action (.github/workflows/auto-merge.yml) that, on push to the agent's branches, automatically merges them into main and triggers a new GitHub Pages build if the repo uses Pages.
 - The agent's own branches must always start with the prefix claude/, regardless of which agent is working, so they are merged automatically.
 - Use the template templates/auto-merge.yml in BadBagel47/agent-rules. Do not write your own variant. Do not change the branch pattern.
 - If missing: add it. If refused (agents often lack permission to create workflow files): give the user ready-made steps with the file name and file content in separate code blocks, so the file can be added manually via github.com once.
@@ -136,6 +140,8 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Parked items are left out of proposals and broad go-aheads; neutral model level in saved proposals and examples; proposed runs in HANDOFF.md when the backlog is split.
+  - Existing project rules may stay in HANDOFF.md if linked; more specific project rules are kept; changes to project rules need approval; links from the project's AGENTS.md count; no automatic merge when project rules require review; branch comparison with enough history.
   - Proposed runs updated after each run with remaining groups re-lettered from A; items already done earlier are listed separately, not as run results.
   - Project rules live in the project's AGENTS.md below the reference (existing AGENTS.md files are kept, only duplicates and conflicts removed); tool settings files are left alone; decisions documents and separate bug/feature lists linked from HANDOFF.md count; short log in HANDOFF.md allowed; Swedish priority scale accepted; existing product language is the project language.
   - Removed redundant integration line; merged translation lines; shorter adaptation plan example.
