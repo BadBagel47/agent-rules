@@ -95,8 +95,9 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.
-7. Force push, deleting files or rewriting history always requires approval.
-8. Report all IDs with a short status. Never claim more than has been verified: distinguish between changed in code, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site or the commit when available.
+7. By default, the changes must be published and visible after a run. If the project needs an extra step to publish (e.g. a push to a release branch), it is part of the run. A project may instead use test builds if the user has chosen so (recorded as a decision in HANDOFF.md): the run then produces a test build with a direct link, and publishing happens only when the user approves, e.g. "Publicera". If automatic publishing is missing entirely: suggest a one-time action that makes it possible.
+8. Force push, deleting files or rewriting history always requires approval.
+9. Report all IDs with a short status. Never claim more than has been verified: distinguish between changed in code, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site or the commit when available.
 
 ## AUTOMATIC MERGE TO MAIN
 - Do not add automatic merge if the project rules require review before main (e.g. a pull request approved by the user); then open a pull request and give the user a direct link to it.
@@ -140,6 +141,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## CHANGELOG
 - Unreleased:
+  - Changes are published and visible after a run by default (extra publishing steps are part of the run); projects may opt for test builds approved with "Publicera".
   - Parked items are left out of proposals and broad go-aheads; neutral model level in saved proposals and examples; proposed runs in HANDOFF.md when the backlog is split.
   - Existing project rules may stay in HANDOFF.md if linked; more specific project rules are kept; changes to project rules need approval; links from the project's AGENTS.md count; no automatic merge when project rules require review; branch comparison with enough history.
   - Proposed runs updated after each run with remaining groups re-lettered from A; items already done earlier are listed separately, not as run results.
