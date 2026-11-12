@@ -10,7 +10,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| – | – | No open proposals | – |
+| B-006 | Förslag | Inventory can miss branches: a cloud checkout may be cloned with a single-branch fetch refspec, so `git branch -r` shows only some branches (in bricks the 2026-11-11 inventory missed 11 of 13). Add to the inventory step: list branches from the remote itself (e.g. `git ls-remote --heads origin` or the GitHub REST API) and fetch all of them (`git fetch origin '+refs/heads/*:refs/remotes/origin/*'`) before comparing with main. | bricks, 2026-11-12 |
 
 ## Published / declined
 
