@@ -1,14 +1,8 @@
-> **DRAFT – NOT IN EFFECT.** The changelog in effect is [CHANGELOG.md](../CHANGELOG.md) (not yet created; until then the changelog is at the end of AGENTS.md).
-
 # Changelog – global agent rules
 
-- Unreleased:
-  - Changelog moved to CHANGELOG.md and the rule-maintenance workflow to MAINTAINING.md, so AGENTS.md is shorter to read in every session (F-009 → AR-009).
-  - Proposals to the rules get their own ID prefix AR- (F-008 → AR-008).
-  - Inventory first makes sure every remote branch is visible (B-006 → AR-006).
-  - Template templates/archive-branches.yml for tagging branches before deletion when the agent cannot create tags (B-007 → AR-007).
-- 1.3 (2026-11-12): Safety principle at the top: nothing may be lost, irreversible actions need an explicit yes, unclear answers mean the safest option (F-004). On conflicts, safe and independent changes required by the rules are done directly; the rest waits for the adaptation plan (B-005).
-- 1.2 (2026-11-12): Exception for the agent-rules repo itself (B-003); the confirmation line also states the version the repo followed before (F-002); adaptation plan items are referred to as "punkt 1.1" in the chat (F-001).
+- 1.4 (2026-11-12): Inventory first makes sure every remote branch is visible (AR-006). Template templates/archive-branches.yml for tagging branches before deletion when the agent cannot create tags (AR-007). Proposals to the rules get the ID prefix AR- (AR-008). Changelog moved to CHANGELOG.md and the rule-maintenance workflow to MAINTAINING.md, so AGENTS.md is shorter (AR-009).
+- 1.3 (2026-11-12): Safety principle at the top: nothing may be lost, irreversible actions need an explicit yes, unclear answers mean the safest option (AR-004). On conflicts, safe and independent changes required by the rules are done directly; the rest waits for the adaptation plan (AR-005).
+- 1.2 (2026-11-12): Exception for the agent-rules repo itself (AR-003); the confirmation line also states the version the repo followed before (AR-002); adaptation plan items are referred to as "punkt 1.1" in the chat (AR-001).
 - 1.1 (2026-11-12):
   - Terms: global agent rules and project rules. Project rules live in the project's AGENTS.md below the reference (existing ones in HANDOFF.md may stay if linked); more specific project rules are kept; changes to them need approval.
   - Adaptation plan with numbered items that can be approved or stopped individually; conflicting project rules shown with a recommendation; recorded decisions are not raised again.

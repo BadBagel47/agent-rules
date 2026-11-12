@@ -4,8 +4,10 @@ Global agent rules for AI coding agents working in BadBagel47's repositories. Ru
 
 - `AGENTS.md` – the current rules (single source of truth)
 - `templates/` – files agents copy into project repos (e.g. `auto-merge.yml`)
-- `BACKLOG.md` – proposals for changes to the rules
-- `drafts/AGENTS-next.md` – collected, not yet published changes (not in effect; only exists while changes are pending)
+- `CHANGELOG.md` – what changed in each version
+- `BACKLOG.md` – proposals for changes to the rules (IDs AR-001 …)
+- `MAINTAINING.md` – how rule changes are drafted and published
+- `drafts/` – collected, not yet published changes (not in effect; only exists while changes are pending)
 - `versions/` – archived earlier versions of the rules
 
 Project repos start their `AGENTS.md` with this reference, followed by where HANDOFF.md and the backlog are and the project rules:

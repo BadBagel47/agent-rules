@@ -1,15 +1,13 @@
-> **DRAFT – NOT IN EFFECT.** The rules in effect are in [AGENTS.md](../AGENTS.md).
-
 # AGENT RULES, version 1.3 (2026-11-12)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
 - **Global agent rules** (Swedish: *övergripande agentregler*): this file. Applies to all repos.
 - **Project rules** (Swedish: *projektregler*): rules that apply to one repo only. They live in that repo's AGENTS.md, below the reference to this file. Existing project rules in HANDOFF.md may stay there if the project's AGENTS.md links to them.
-- **Exception – the agent-rules repo itself:** in BadBagel47/agent-rules, AGENTS.md is the global agent rules, BACKLOG.md is the backlog and MAINTAINING.md is the workflow. The ON START steps for project repos (reference, HANDOFF.md, inventory, adaptation) do not apply there.
+- **Exception – the agent-rules repo itself:** in BadBagel47/agent-rules, AGENTS.md is the global agent rules, BACKLOG.md is the backlog and UPDATING THE RULES is the workflow. The ON START steps for project repos (reference, HANDOFF.md, inventory, adaptation) do not apply there.
 
 ## SAFETY PRINCIPLE (takes precedence over everything else)
-- Nothing the agent does may be lost. Everything that is removed or overwritten must be recoverable (e.g. via git history, or a tag before a branch is deleted). If the agent cannot create tags itself, use the template templates/archive-branches.yml in BadBagel47/agent-rules.
+- Nothing the agent does may be lost. Everything that is removed or overwritten must be recoverable (e.g. via git history, or a tag before a branch is deleted).
 - What cannot be recovered (e.g. rewritten history, data in external services such as databases, DNS or hosting) requires an explicit yes from the user for that specific action.
 - If an answer from the user is unclear, always choose the safest option.
 
@@ -25,10 +23,10 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Sync with the latest main before starting work and before assigning new IDs.
 - Always read HANDOFF.md at the start of every session.
 - Check which tools, permissions and access the environment has (e.g. push to main, creating workflow files, GitHub API) instead of assuming. Note limitations in HANDOFF.md with the date.
-- If HANDOFF.md is missing, or lacks the line "Inventory: YYYY-MM-DD" (or an equivalent existing note, which is then rewritten to that format without a new inventory): automatically do a thorough inventory of the repo (all branches – first make sure every remote branch is visible, e.g. compare with `git ls-remote --heads` and fetch all branches if the checkout only fetched one – open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the line "Inventory: YYYY-MM-DD" and the publishing method in HANDOFF.md. After that, selective reading applies.
+- If HANDOFF.md is missing, or lacks the line "Inventory: YYYY-MM-DD" (or an equivalent existing note, which is then rewritten to that format without a new inventory): automatically do a thorough inventory of the repo (all branches, open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the line "Inventory: YYYY-MM-DD" and the publishing method in HANDOFF.md. After that, selective reading applies.
 - Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: include moving content that duplicates HANDOFF.md or BACKLOG.md into the new structure, with a mapping between old and new IDs, in the adaptation plan.
 - Include branches with work that was never merged into main in the adaptation plan (merge, keep or delete). First check whether the branch content already exists in main (e.g. squash-merged), using enough history (not a shallow clone) for the comparison. Group similar branches into one plan item.
-- HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see CHANGELOG.md), adapt the repo and update the version in HANDOFF.md. For a new major version (X): change nothing until the user has approved an adaptation plan.
+- HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see the changelog), adapt the repo and update the version in HANDOFF.md. For a new major version (X): change nothing until the user has approved an adaptation plan.
 
 ## ADAPTATION PLAN
 - Used on conflicts, for a new major version, and for anything during setup that needs approval (e.g. ID conversion, unmerged branches, moving found documentation, translating an existing README).
@@ -46,10 +44,20 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
     - 2.1 Lösta buggar – projektregel: raderas; agentregel: flyttas till klar-sektion. Rekommendation: agentregeln (historiken bevaras)
   - The user replies e.g. "Kör 2.1" (recommendation) or "2.1 projektregel".
 
-## PROPOSING CHANGES TO THESE RULES
-- Proposals are tracked in BACKLOG.md in BadBagel47/agent-rules, with an ID (AR-001, AR-002 …, so they are not confused with IDs in project repos) and a status (Förslag, I utkast, Publicerad, Nekad).
-- An agent that notices a problem with these rules in any repo reports it to the user and, if it has access, adds it there as a proposal. If it lacks access: ask the user to grant it (e.g. add the repo to the session).
-- How rule changes are drafted and published is described in MAINTAINING.md in agent-rules; it only applies when working there.
+## UPDATING THE RULES
+- Proposals for changes to these rules are tracked in BACKLOG.md in BadBagel47/agent-rules, with an ID and status (Förslag, I utkast, Publicerad, Nekad). An agent that notices a problem with these rules in any repo reports it to the user and, if it has access, adds it there as a proposal.
+- An agent may propose changes to these rules. Changes the user has approved are first collected in the draft drafts/AGENTS-next.md, never directly in AGENTS.md. The draft is never in effect.
+- The draft is a full copy of AGENTS.md with the changes applied, marked as a draft at the top, with the changes listed under "Unreleased" in the changelog. If the draft is missing: create it from the current AGENTS.md.
+- The original lives in the public repo BadBagel47/agent-rules. If the agent lacks write access: ask the user to grant access (e.g. add the repo to the session) and give ready-made steps for it.
+- Publish only when the user explicitly says so (e.g. "Publicera reglerna"). Then:
+  1. Save the current AGENTS.md unchanged as versions/AGENTS-vX.Y.md.
+  2. Copy the draft to AGENTS.md, remove the draft marking and set the new version number and today's date:
+     - X (major) when existing content in repos must be changed, moved or removed, e.g. new file structure or new ID system.
+     - Y (minor) for clarifications and additions, including new sections or notes that are only added.
+  3. Replace "Unreleased" with a changelog line: version, date and a short description of what changed.
+  4. Delete the draft.
+- The rules are written in English. The user may describe the change in Swedish.
+- Commit and push to main per the normal rules and report the new version.
 
 ## DOCUMENTATION
 - Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, decisions, and goals and way of working as their own sections or as links to separate documents) and features and bugs (BACKLOG.md).
@@ -143,5 +151,17 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Never claim legal certainty. Refer to official sources (e.g. IMY or PTS) and say when a question needs legal advice.
 - The inventory includes a brief review of this. Findings go into the backlog.
 
-## CHANGES
-- What changed in each version is in CHANGELOG.md in BadBagel47/agent-rules: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/CHANGELOG.md
+## CHANGELOG
+- 1.3 (2026-11-12): Safety principle at the top: nothing may be lost, irreversible actions need an explicit yes, unclear answers mean the safest option (F-004). On conflicts, safe and independent changes required by the rules are done directly; the rest waits for the adaptation plan (B-005).
+- 1.2 (2026-11-12): Exception for the agent-rules repo itself (B-003); the confirmation line also states the version the repo followed before (F-002); adaptation plan items are referred to as "punkt 1.1" in the chat (F-001).
+- 1.1 (2026-11-12):
+  - Terms: global agent rules and project rules. Project rules live in the project's AGENTS.md below the reference (existing ones in HANDOFF.md may stay if linked); more specific project rules are kept; changes to them need approval.
+  - Adaptation plan with numbered items that can be approved or stopped individually; conflicting project rules shown with a recommendation; recorded decisions are not raised again.
+  - Inventory: fixed "Inventory" line, all branches (with enough history), PRs, Issues, publishing method, sensitive information and laws and regulations.
+  - Documentation: HANDOFF.md is current state (short log allowed) with a Decisions section; other documents, decision documents and separate bug/feature lists may be linked; HANDOFF.md and the backlog in root or docs/.
+  - Run groups: letters always from A for the latest list; parked items excluded from broad go-aheads; already done items reported separately; neutral model levels in saved documents.
+  - Publishing: changes published and verified after a run by default; optional test builds approved with "Publicera"; no automatic merge where review is required.
+  - Language: working documents accept Swedish and English without translation; existing product language is the project language.
+  - New: one-time actions to remove recurring manual steps; laws and regulations (Sweden and EU); check tools and permissions at start; never claim more than verified; IDs in chat with a short explanation.
+  - Rule changes go through a draft and a backlog (BACKLOG.md) and are published only on the user's explicit request; major versions only when existing content must be changed.
+- 1.0 (2026-11-11): First version.
