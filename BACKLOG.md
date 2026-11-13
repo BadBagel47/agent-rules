@@ -10,7 +10,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| – | – | No open proposals | – |
+| AR-010 | Förslag | In run proposals (and "Kvar"), each ID line briefly describes what will be done and its effect, not only the problem, e.g. "B-010 – kopiera typsnitten till sajten så att de inte hämtas från Google (besökarnas IP-adresser skickas inte dit)". Groups with a single ID still use the heading line plus one ID line. Detailed explanations only when the user asks. | qlab46.net report, 2026-11-13 |
 
 ## Published / declined
 
