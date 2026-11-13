@@ -1,5 +1,6 @@
 # Changelog – global agent rules
 
+- 1.6 (2026-11-13): Reports avoid technical details the user does not need (hashes, metrics, file names, internals) and state verification in plain words (AR-011).
 - 1.5 (2026-11-13): Run proposals: each ID line says what will be done and what it gives, not only the problem; also for single-ID groups (AR-010).
 - 1.4 (2026-11-12): Inventory first makes sure every remote branch is visible (AR-006). Template templates/archive-branches.yml for tagging branches before deletion when the agent cannot create tags (AR-007). Proposals to the rules get the ID prefix AR- (AR-008). Changelog moved to CHANGELOG.md and the rule-maintenance workflow to MAINTAINING.md, so AGENTS.md is shorter (AR-009).
 - 1.3 (2026-11-12): Safety principle at the top: nothing may be lost, irreversible actions need an explicit yes, unclear answers mean the safest option (AR-004). On conflicts, safe and independent changes required by the rules are done directly; the rest waits for the adaptation plan (AR-005).

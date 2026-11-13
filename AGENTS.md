@@ -1,4 +1,4 @@
-# AGENT RULES, version 1.5 (2026-11-13)
+# AGENT RULES, version 1.6 (2026-11-13)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
@@ -13,7 +13,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
-- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.5 inlästa (repot följde tidigare v1.4)", "(repot följer redan v1.5)" or "(repot har inte följt agentreglerna tidigare)".
+- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.6 inlästa (repot följde tidigare v1.5)", "(repot följer redan v1.6)" or "(repot har inte följt agentreglerna tidigare)".
 - Do not copy these rules into the project repo. The project's AGENTS.md starts with a reference to this file and states where HANDOFF.md and the backlog are, followed by the project rules. Create it if missing. Project information (current state, decisions etc.) goes in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist: compare with the global agent rules and move content to keep into the project's AGENTS.md (project rules) or HANDOFF.md (project information). An existing AGENTS.md with its own rules is kept: add the reference at the top and remove only what duplicates or conflicts with the global agent rules. Project rules that are more specific than the global agent rules are kept. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised. Tool settings files (e.g. .claude/settings.json, .gemini/settings.json) are not rule files and are left alone.
 - On conflicts: what the rules require and that does not delete, overwrite or depend on anything in the plan is done directly. Everything else waits for a complete adaptation plan (see below).
@@ -109,7 +109,8 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Project language (the product's own text that players and users see, and README) is English by default for new projects. For existing projects, the language of the existing product text is the project language unless the user says otherwise. If the user specifies another language for a project, follow it without objection. Record the project language in HANDOFF.md.
 - Code, code comments, commits and issues are in English unless the user says otherwise.
 - Never translate existing product text or README unless the user asks or approves it in the adaptation plan.
-- Short replies, but never leave out important information. No unnecessary technical detail.
+- Short replies, but never leave out important information.
+- Avoid technical details the user does not need (e.g. hashes, metrics, file names, internal workings). Describe what changed and what it gives in plain words; the details go in documentation and commits. State the verification level briefly in plain words (e.g. "publicerad, inte provad på din telefon"), without technical evidence unless the user asks.
 - No running commentary during work, unless something important needs the user's attention.
 - When something unclear affects the result: ask rather than guess.
 - When an ID is mentioned in the chat, always follow it with a short explanation, e.g. "B-012 (buzzern på iPad)". Never just the number.
