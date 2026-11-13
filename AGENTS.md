@@ -1,4 +1,4 @@
-# AGENT RULES, version 1.4 (2026-11-12)
+# AGENT RULES, version 1.5 (2026-11-13)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
@@ -13,7 +13,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
-- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.4 inlästa (repot följde tidigare v1.3)", "(repot följer redan v1.4)" or "(repot har inte följt agentreglerna tidigare)".
+- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.5 inlästa (repot följde tidigare v1.4)", "(repot följer redan v1.5)" or "(repot har inte följt agentreglerna tidigare)".
 - Do not copy these rules into the project repo. The project's AGENTS.md starts with a reference to this file and states where HANDOFF.md and the backlog are, followed by the project rules. Create it if missing. Project information (current state, decisions etc.) goes in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist: compare with the global agent rules and move content to keep into the project's AGENTS.md (project rules) or HANDOFF.md (project information). An existing AGENTS.md with its own rules is kept: add the reference at the top and remove only what duplicates or conflicts with the global agent rules. Project rules that are more specific than the global agent rules are kept. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised. Tool settings files (e.g. .claude/settings.json, .gemini/settings.json) are not rule files and are left alone.
 - On conflicts: what the rules require and that does not delete, overwrite or depend on anything in the plan is done directly. Everything else waits for a complete adaptation plan (see below).
@@ -69,7 +69,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 1. New bugs, features, planning and design are documented and collected for a combined run. They are not fixed immediately.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
 3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run. Only suggest models and levels available in the agent's own environment, which the user can select there, never models from other providers.
-   - Each proposed run group gets a letter (A, B, C …). Format: a heading line with letter – model and level – short description, and below it one line per ID with a short explanation.
+   - Each proposed run group gets a letter (A, B, C …). Format: a heading line with letter – model and level – short description, and below it one line per ID that briefly says what will be done and what it gives, not only the problem. This also applies to groups with a single ID. Longer explanations only when the user asks.
    - Every time the proposal is shown or updated, the letters start again from A, in priority order. Letters always refer to the most recently shown list; older letters no longer apply. If the user replies with a letter that may refer to an older list: briefly confirm which group is meant before running.
    - Save the proposal under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made.
    - In the saved proposal and any other saved document, state model recommendations as a neutral level (e.g. strong or standard model, high or medium level), since different agents read them. In the chat, the agent names its own models. Historical notes may keep model names.
@@ -82,12 +82,12 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
    - Commits and reports use item IDs, not the letters.
    - Example (written in Swedish in the chat):
      - **A** – <modell>, <nivå> – Poäng och tidtagning efter omstart
-       - B-003 – Poängen nollställs inte
-       - B-005 – Tidtagningen startar inte om
+       - B-003 – Nollställ poängen vid omstart
+       - B-005 – Starta om tidtagningen vid omstart
      - **B** – <modell>, <nivå> – Flerspelarlobby
-       - D-010 – Design av lobbyn
-       - F-007 – Rumskoder för att bjuda in spelare
-       - F-009 – Kö när rummet är fullt
+       - D-010 – Ta fram en design för lobbyn
+       - F-007 – Lägg till rumskoder så att spelare kan bjudas in
+       - F-009 – Lägg till en kö när rummet är fullt
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.

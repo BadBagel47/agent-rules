@@ -10,7 +10,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| AR-010 | I utkast | In run proposals (and "Kvar"), each ID line briefly describes what will be done and its effect, not only the problem, e.g. "B-010 – kopiera typsnitten till sajten så att de inte hämtas från Google (besökarnas IP-adresser skickas inte dit)". Groups with a single ID still use the heading line plus one ID line. Detailed explanations only when the user asks. | qlab46.net report, 2026-11-13 |
+| – | – | No open proposals | – |
 
 ## Published / declined
 
@@ -25,3 +25,4 @@ Proposals for changes to the global agent rules (AGENTS.md).
 | AR-007 | Publicerad | 1.4 | The safety principle asks for a tag before a branch is deleted, but Claude cloud sessions cannot push tags or write refs through the REST API. Add a template (e.g. templates/archive-branches.yml) that tags each listed branch as archive/<branch>, verifies the tag on origin and only then deletes the branch, and mention it in the rules as the fallback. |
 | AR-008 | Publicerad | 1.4 | Give agent-rules backlog IDs their own prefix, AR- (e.g. AR-006), so they are not confused with IDs in project repos (bricks also has F-006 and F-007). Keep the numbers; existing IDs get the prefix (B-006 → AR-006). |
 | AR-009 | Publicerad | 1.4 | Keep AGENTS.md lean (read in every session, ~4,000 words): move the changelog to CHANGELOG.md and UPDATING THE RULES to a separate file used only in agent-rules (about a quarter less to read). From now on, new proposals should rewrite or merge existing rules rather than only add lines. |
+| AR-010 | Publicerad | 1.5 | In run proposals (and "Kvar"), each ID line briefly describes what will be done and its effect, not only the problem, e.g. "B-010 – kopiera typsnitten till sajten så att de inte hämtas från Google (besökarnas IP-adresser skickas inte dit)". Groups with a single ID still use the heading line plus one ID line. Detailed explanations only when the user asks. |
