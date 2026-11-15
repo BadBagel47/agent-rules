@@ -16,4 +16,6 @@ Applies only when working in BadBagel47/agent-rules.
   5. Delete the drafts.
 - The rules are written in English. The user may describe the change in Swedish.
 - Commit and push to main per the normal rules and report the new version.
+- After every publication, give the user this message in its own code block, to paste into the agent of any repo. It works whether or not the repo has followed the rules before, and it names no version:
+  `Läs de senaste agentreglerna i https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md och bekräfta vilken version du följer. Anpassa repot om det behövs och visa sedan aktuella förslag enligt reglerna.`
 
