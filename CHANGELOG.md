@@ -1,5 +1,6 @@
 # Changelog – global agent rules
 
+- 1.8 (2026-11-15): If HANDOFF.md states a newer rules version than the agent has loaded (e.g. another agent updated the repo), the agent re-reads the rules and never changes the version note back (AR-013).
 - 1.7 (2026-11-14): The prefix claude/ is only for temporary work branches; branches with a lasting purpose (test, preview, release) must never use it, so they are not merged automatically (AR-012).
 - 1.6 (2026-11-13): Reports avoid technical details the user does not need (hashes, metrics, file names, internals) and state verification in plain words (AR-011).
 - 1.5 (2026-11-13): Run proposals: each ID line says what will be done and what it gives, not only the problem; also for single-ID groups (AR-010).

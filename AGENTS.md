@@ -1,4 +1,4 @@
-# AGENT RULES, version 1.7 (2026-11-14)
+# AGENT RULES, version 1.8 (2026-11-15)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
@@ -13,7 +13,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
-- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.7 inlästa (repot följde tidigare v1.6)", "(repot följer redan v1.7)" or "(repot har inte följt agentreglerna tidigare)".
+- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.8 inlästa (repot följde tidigare v1.7)", "(repot följer redan v1.8)" or "(repot har inte följt agentreglerna tidigare)".
 - Do not copy these rules into the project repo. The project's AGENTS.md starts with a reference to this file and states where HANDOFF.md and the backlog are, followed by the project rules. Create it if missing. Project information (current state, decisions etc.) goes in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist: compare with the global agent rules and move content to keep into the project's AGENTS.md (project rules) or HANDOFF.md (project information). An existing AGENTS.md with its own rules is kept: add the reference at the top and remove only what duplicates or conflicts with the global agent rules. Project rules that are more specific than the global agent rules are kept. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised. Tool settings files (e.g. .claude/settings.json, .gemini/settings.json) are not rule files and are left alone.
 - On conflicts: what the rules require and that does not delete, overwrite or depend on anything in the plan is done directly. Everything else waits for a complete adaptation plan (see below).
@@ -27,6 +27,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: include moving content that duplicates HANDOFF.md or BACKLOG.md into the new structure, with a mapping between old and new IDs, in the adaptation plan.
 - Include branches with work that was never merged into main in the adaptation plan (merge, keep or delete). First check whether the branch content already exists in main (e.g. squash-merged), using enough history (not a shallow clone) for the comparison. Group similar branches into one plan item.
 - HANDOFF.md states which rules version the repo was last adapted to. If this version is newer: briefly report what changed (see CHANGELOG.md), adapt the repo and update the version in HANDOFF.md. For a new major version (X): change nothing until the user has approved an adaptation plan.
+- If HANDOFF.md states a newer rules version than the one the agent has loaded (e.g. because another agent updated the repo): re-read the global agent rules before continuing, and never change the version note back.
 
 ## ADAPTATION PLAN
 - Used on conflicts, for a new major version, and for anything during setup that needs approval (e.g. ID conversion, unmerged branches, moving found documentation, translating an existing README).
