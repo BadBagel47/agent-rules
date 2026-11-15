@@ -1,4 +1,4 @@
-# AGENT RULES, version 1.8 (2026-11-15)
+# AGENT RULES, version 1.9 (2026-11-15)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
@@ -13,7 +13,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
-- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, e.g. "Agentregler v1.8 inlästa (repot följde tidigare v1.7)", "(repot följer redan v1.8)" or "(repot har inte följt agentreglerna tidigare)".
+- Confirm in the first reply of every session with one short line which rules version was loaded and which version the repo followed before, with the real version numbers in place of X.Y: "Agentregler vX.Y inlästa (repot följde tidigare vX.Y)", "(repot följer redan vX.Y)" or "(repot har inte följt agentreglerna tidigare)".
 - Do not copy these rules into the project repo. The project's AGENTS.md starts with a reference to this file and states where HANDOFF.md and the backlog are, followed by the project rules. Create it if missing. Project information (current state, decisions etc.) goes in HANDOFF.md.
 - Do not create agent-specific rule files (e.g. CLAUDE.md, GEMINI.md). If such files already exist: compare with the global agent rules and move content to keep into the project's AGENTS.md (project rules) or HANDOFF.md (project information). An existing AGENTS.md with its own rules is kept: add the reference at the top and remove only what duplicates or conflicts with the global agent rules. Project rules that are more specific than the global agent rules are kept. Files that only refer to or import AGENTS.md (e.g. a CLAUDE.md containing only @AGENTS.md) are allowed and are not raised. Tool settings files (e.g. .claude/settings.json, .gemini/settings.json) are not rule files and are left alone.
 - On conflicts: what the rules require and that does not delete, overwrite or depend on anything in the plan is done directly. Everything else waits for a complete adaptation plan (see below).
@@ -54,7 +54,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, decisions, and goals and way of working as their own sections or as links to separate documents) and features and bugs (BACKLOG.md).
 - Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md or the project's AGENTS.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
 - HANDOFF.md describes the current state briefly and must not grow into a log. A short list of the latest entries (about five) is fine; older history belongs in git, changelogs or log documents.
-- If work cannot be finished in the session: record in HANDOFF.md exactly where it stopped and how to continue, and push.
+- If work cannot be finished in the session: first record in HANDOFF.md exactly where it stopped and how to continue, and push that. Then push the unfinished code with [wip] in the commit message, so it is not merged automatically or published.
 - Completed items are moved to a done section in BACKLOG.md, not deleted.
 - Priority uses a fixed scale in the documentation: High, Medium, Low (or the Swedish Hög, Medel, Låg).
 - Update documentation in the same commit as the change.
@@ -70,8 +70,9 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 1. New bugs, features, planning and design are documented and collected for a combined run. They are not fixed immediately.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
 3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run. Only suggest models and levels available in the agent's own environment, which the user can select there, never models from other providers.
-   - Each proposed run group gets a letter (A, B, C …). Format: a heading line with letter – model and level – short description, and below it one line per ID that briefly says what will be done and what it gives, not only the problem. This also applies to groups with a single ID. Longer explanations only when the user asks.
-   - Every time the proposal is shown or updated, the letters start again from A, in priority order. Letters always refer to the most recently shown list; older letters no longer apply. If the user replies with a letter that may refer to an older list: briefly confirm which group is meant before running.
+   - Each proposed run group gets a letter (A, B, C …). After Z the series continues with AA, AB, AC and so on. Format: a heading line with letter – model and level – short description, and below it one line per ID that briefly says what will be done and what it gives, not only the problem. This also applies to groups with a single ID. Longer explanations only when the user asks.
+   - Every time the proposal is shown or updated, the letters start again from A, in priority order. Letters always refer to the list most recently shown in the agent's own chat; older letters no longer apply. If the user replies with a letter that may refer to an older list: briefly confirm which group is meant before running.
+   - If the proposal has more than ten groups: show the ten with the highest priority and state how many remain. The rest are shown if the user asks.
    - Save the proposal under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made.
    - In the saved proposal and any other saved document, state model recommendations as a neutral level (e.g. strong or standard model, high or medium level), since different agents read them. In the chat, the agent names its own models. Historical notes may keep model names.
    - The user may reply e.g. "Kör A", "Kör A och C", "Kör alla" or "Kör alla med <modell>". Multiple groups are run in priority order; the order does not need to be mentioned in the report.
@@ -79,7 +80,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
    - After a run: remove the groups that were run from "Proposed runs" and show the remaining groups with new letters from A.
    - If approved items turn out to be already done: list them at the top under "Redan klart sedan en tidigare session", without letters, and do not report them as results of the run.
    - Items the user has set aside for later get the status "Parkerad" in the backlog. Equivalent existing statuses (e.g. Deferred, Uppskjuten, Paused, Pausad) count as parked. They are not part of the proposal but are listed briefly under "Parkerat" after it.
-   - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups in the current proposal, never parked items. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
+   - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups shown in the current proposal, never parked items or groups not shown. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
    - Commits and reports use item IDs, not the letters.
    - Example (written in Swedish in the chat):
      - **A** – <modell>, <nivå> – Poäng och tidtagning efter omstart
@@ -92,16 +93,21 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.
-7. By default, the changes must be published and visible after a run. If the project needs an extra step to publish (e.g. a push to a release branch), it is part of the run. A project may instead use test builds if the user has chosen so (recorded as a decision in HANDOFF.md): the run then produces a test build with a direct link, and publishing happens only when the user approves, e.g. "Publicera". If main publishes directly, the changes stay on a branch with a preview until then, and automatic merge is not used. Project rules requiring review before main (e.g. a pull request) are treated as this choice. If automatic publishing is missing entirely: suggest a one-time action that makes it possible. Check the published site when possible. If the publishing method is unknown, find out during inventory or ask the user; never report something as published without having verified it.
-8. Force push, deleting files or rewriting history always requires approval.
-9. Report all IDs with a short status. Never claim more than has been verified: distinguish between changed in code, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site or the commit when available.
+7. By default, the changes must be published and visible after a run. If the project needs an extra step to publish (e.g. a push to a release branch), it is part of the run. A project may instead use test builds if the user has chosen so (recorded as a decision in HANDOFF.md): the run then produces a test build with a direct link, and publishing happens only when the user approves, e.g. "Publicera". If main publishes directly, the changes stay on a branch with a preview until then, and automatic merge is not used. Project rules requiring review before main (e.g. a pull request) are treated as this choice. If automatic publishing is missing entirely: suggest a one-time action that makes it possible. Check the published site when possible. If it is broken after a run: restore the last working version at once, then report what happened. If the publishing method is unknown, find out during inventory or ask the user; never report something as published without having verified it.
+8. Deleting tracked files that approved work requires is covered by the go-ahead. Files not tracked by git, force push and rewritten history require an explicit yes.
+9. Report all IDs with a short status. Never claim more than has been verified: distinguish between changed in code, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site when available; a commit only as a clickable link, never as a written-out hash.
+
+## SEVERAL AGENTS IN THE SAME REPO
+- Before starting on an item: mark it as "Pågår" with the date in the backlog and push that. Do not touch items another agent has marked. If a mark is more than a day old: ask the user.
+- New IDs are pushed at once. On a collision, the agent renumbers its own item.
+- If a push is rejected because main has changed: fetch the changes, run the tests again and push again. Never force a push through.
 
 ## AUTOMATIC MERGE TO MAIN
 - Do not add automatic merge if the project rules require review before main (e.g. a pull request approved by the user); then open a pull request and give the user a direct link to it.
 - Otherwise, if the agent can only push to its own branch, the repo must have a GitHub Action (.github/workflows/auto-merge.yml) that, on push to the agent's branches, automatically merges them into main and triggers a new GitHub Pages build if the repo uses Pages.
 - The agent's own branches must always start with the prefix claude/, regardless of which agent is working, so they are merged automatically.
 - The prefix claude/ is only for the agent's temporary work branches. Branches with a lasting purpose (e.g. test, preview, release) must never start with claude/, so they are not merged automatically.
-- Use the template templates/auto-merge.yml in BadBagel47/agent-rules. Do not write your own variant. Do not change the branch pattern.
+- Use the template templates/auto-merge.yml in BadBagel47/agent-rules. Do not write your own variant. Do not change the branch pattern. If the repo's file differs from the template (e.g. it lacks the [wip] skip): update it.
 - If missing: add it. If refused (agents often lack permission to create workflow files): give the user ready-made steps with the file name and file content in separate code blocks, so the file can be added manually via github.com once.
 - After pushing, check that the Action run succeeded if possible. Otherwise: mention in the report that it needs checking. If the merge fails due to a conflict: resolve it in the same session if possible, otherwise report it clearly.
 

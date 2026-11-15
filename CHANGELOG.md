@@ -1,5 +1,11 @@
 # Changelog – global agent rules
 
+- 1.9 (2026-11-15):
+  - Several agents in the same repo: "Pågår" marks, IDs pushed at once, rejected pushes are re-fetched and re-tested, letters refer to the own chat (AR-014).
+  - Unfinished work is pushed with [wip] and skipped by the auto-merge template, which repos update (AR-015).
+  - Deleting tracked files within approved work is covered by the go-ahead; untracked files, force push and rewritten history need an explicit yes (AR-016).
+  - A broken published site is restored at once (AR-017). Commits only as clickable links (AR-018). Version example written as vX.Y (AR-019).
+  - Run groups continue with AA, AB after Z; at most ten groups are shown at a time, and "Kör alla" covers only those shown (AR-020).
 - 1.8 (2026-11-15): If HANDOFF.md states a newer rules version than the agent has loaded (e.g. another agent updated the repo), the agent re-reads the rules and never changes the version note back (AR-013).
 - 1.7 (2026-11-14): The prefix claude/ is only for temporary work branches; branches with a lasting purpose (test, preview, release) must never use it, so they are not merged automatically (AR-012).
 - 1.6 (2026-11-13): Reports avoid technical details the user does not need (hashes, metrics, file names, internals) and state verification in plain words (AR-011).
