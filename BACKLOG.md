@@ -10,7 +10,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| – | – | No open proposals | – |
+| AR-024 | I utkast | Show choices as buttons when the environment supports it (max four per question), otherwise code blocks; only at real decision points. | User, 2026-11-17 |
 
 ## Published / declined
 
