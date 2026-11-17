@@ -16,6 +16,8 @@ Proposals for changes to the global agent rules (AGENTS.md).
 | AR-028 | I utkast | The user cannot see how a proposal is prioritized, and a group could be run before one it builds on. Show the prioritization basis in one line; mark dependencies ("bygger på A"), order by them and warn before running out of order. | User, 2026-11-17 |
 | AR-029 | I utkast | Review of the draft: contradictions between run-proposal rules ("Kör alla" vs open questions, question labels across agents, answers not recorded, investigate-all vs top three, dependencies on non-ready groups) and in REPLY FORMAT (file names for manual steps, ten-line limit vs proposals). Gathered into one RUN PROPOSALS section. | Draft review, 2026-11-17 |
 | AR-030 | I utkast | Agents in different repos mixed up IDs because each repo counts from 001. IDs from other repos get the repo name in front; own IDs stay short; renamed repos keep the old name as an alias. | User, 2026-11-17 |
+| AR-031 | I utkast | Draft review: "Pågår" marks were never removed and did not say whose they were; no rule for changes in other repos; saved proposals overwritten by other agents. Plus (critical agent): use a repo's backlog tool if the project's AGENTS.md names one. | Draft review and critical agent, 2026-11-17 |
+| AR-032 | Förslag | Slim the rules after 1.12 without changing their meaning (about 4,600 words): shorter wording, move rules to where they belong (e.g. documentation rules out of ON START), test against the repos before publishing. Consider at the same time a common backlog format and a shared backlog tool template (based on tools/backlog.mjs in critical). | Draft review, 2026-11-17 |
 
 ## Published / declined
 

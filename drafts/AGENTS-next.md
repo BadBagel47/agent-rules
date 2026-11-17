@@ -68,6 +68,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md or the project's AGENTS.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
 - HANDOFF.md describes the current state briefly and must not grow into a log. A short list of the latest entries (about five) is fine; older history belongs in git, changelogs or log documents.
 - If work cannot be finished in the session: first record in HANDOFF.md exactly where it stopped and how to continue, and push that. Then push the unfinished code with [wip] in the commit message, so it is not merged automatically or published.
+- If the repo has a tool for the backlog and the project's AGENTS.md names it, use it for the steps it covers (e.g. marking items, moving them to done or parked, re-lettering, next free ID, checking) instead of editing by hand.
 - Completed items are moved to a done section in BACKLOG.md, not deleted.
 - Priority uses a fixed scale in the documentation: High, Medium, Low (or the Swedish Hög, Medel, Låg).
 - Update documentation in the same commit as the change.
@@ -79,6 +80,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - If a different ID system exists: include its conversion in the adaptation plan, stating scope and consequences (number of items, old IDs remaining in commits and documents). If the existing system works, recommend keeping it; the user decides. Change nothing without approval.
 - Include the affected IDs in commit messages.
 - IDs belong to their own repo. An ID from another repo is always written with that repo's name in front, in the chat, documentation, commits and between agents (e.g. "network-kit B-007 (rummet stängs för tidigt)"); the repo's own IDs are written without it. Dependencies on another repo are referred to the same way (e.g. "väntar på network-kit F-003").
+- An agent only changes its own repo. If something is needed in another repo: add an item to that repo's backlog stating where it came from, or report it to the user. Code in another repo is only changed if the user explicitly asks.
 - If a repo is renamed: record the old name in its HANDOFF.md ("tidigare X") so agents treat it as an alias, and update references in the current documents (e.g. HANDOFF.md and the backlog) of repos that refer to it. Old commits and logs keep the old name.
 
 ## WORKFLOW
@@ -101,7 +103,7 @@ Building the proposal
 - Format: a heading line with letter – model and level – short description (plus "bygger på X" or "väntar på svar" when relevant), and below it one line per ID that says what will be done and what it gives, not only the problem, also for single-ID groups. Longer explanations only when the user asks.
 - More than ten groups: show the ten first and state how many remain; the rest are shown if the user asks.
 - Parked items (status "Parkerad" or an equivalent such as Deferred, Uppskjuten, Paused, Pausad) are not part of the proposal; list them briefly under "Parkerat".
-- Save the proposal (without question labels) under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made.
+- Save the proposal (without question labels) under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made. The saved proposal is only a snapshot (another agent may replace it); always build your own proposal from the backlog.
 
 Questions
 - For the groups nearest in turn (about the first three), investigate which decisions they need. Decisions that shape the solution or the product (e.g. game rules, design, choice of service, things that are hard to change later) are listed under the group as questions with the agent's recommendation. Small technical choices are made by the agent.
@@ -144,7 +146,7 @@ Example (written in Swedish in the chat):
 - Parkerat: B-004 (motspelarens bräde laggar)
 
 ## SEVERAL AGENTS IN THE SAME REPO
-- Before starting on an item: mark it as "Pågår" with the date in the backlog and push that. Do not touch items another agent has marked. If a mark is more than a day old: ask the user.
+- Before starting on an item: mark it as "Pågår" with the date and the agent's branch or session in the backlog, and push that. Remove the mark when the item is done or parked, or when the work stops (then record in HANDOFF.md where it stopped). Do not touch items another agent has marked. If a mark is more than a day old: ask the user.
 - New IDs are pushed at once. On a collision, the agent renumbers its own item.
 - If a push is rejected because main has changed: fetch the changes, run the tests again and push again. Never force a push through.
 
