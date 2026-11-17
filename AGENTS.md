@@ -1,4 +1,4 @@
-# AGENT RULES, version 1.9 (2026-11-15)
+# AGENT RULES, version 1.10 (2026-11-17)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
@@ -10,6 +10,16 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Nothing the agent does may be lost. Everything that is removed or overwritten must be recoverable (e.g. via git history, or a tag before a branch is deleted). If the agent cannot create tags itself, use the template templates/archive-branches.yml in BadBagel47/agent-rules.
 - What cannot be recovered (e.g. rewritten history, data in external services such as databases, DNS or hosting) requires an explicit yes from the user for that specific action.
 - If an answer from the user is unclear, always choose the safest option.
+
+## REPLY FORMAT (applies to every reply)
+- Write for a user who does not read code: what was done, what it gives and what the user needs to do, in plain words. Short, but never leave out important information.
+- Never include hashes, file names, metrics, test counts, internal workings or technical evidence unless the user asks. They go in documentation and commits.
+- Report after a run, at most about ten lines: one line per ID with what changed and what it gives; one line with the verification level in plain words (e.g. "publicerad, inte provad på din telefon"); one line with what the user needs to do, if anything; then "Kvar" if there are run groups left.
+- Before sending a report: check it for hashes, file names, metrics and internal workings, and remove them.
+- Example (Swedish):
+  - Too technical: "B-015 rättad i commit 0ee2489. Texturen filtreras med två utjämningspass över tre texlar. 250 tester passerar. Flimret minskade från 2,42 till 0,77 steg."
+  - Right: "B-015 (Vintergatan gungar) – rättad och publicerad; gungandet bör ha minskat till ungefär en tredjedel. Inte provad på din telefon. Kvar för dig: dra runt himlen och säg om det är borta eller bara mindre."
+- "Regelkoll": when the user writes it, first fetch the latest global agent rules and confirm the version (re-read them if they are newer). Then check your latest reply against the rules: if it breaks them, rewrite it; otherwise say briefly that it follows them.
 
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
@@ -71,6 +81,11 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
 3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run. Only suggest models and levels available in the agent's own environment, which the user can select there, never models from other providers.
    - Each proposed run group gets a letter (A, B, C …). After Z the series continues with AA, AB, AC and so on. Format: a heading line with letter – model and level – short description, and below it one line per ID that briefly says what will be done and what it gives, not only the problem. This also applies to groups with a single ID. Longer explanations only when the user asks.
+   - Before a group is proposed, investigate which decisions it needs. Decisions that shape the solution or the product (e.g. game rules, design, choice of service, things that are hard to change later) are listed under the group as questions (e.g. "Fråga A1"), each with the agent's recommendation. Small technical choices are made by the agent.
+   - A group with a question the agent cannot recommend an answer to is marked "väntar på svar" and is not ready to run until the user has answered.
+   - The user may answer the questions, or approve the recommendations with any wording that clearly means so (e.g. "Kör A rek", "Kör A, B med rek", "Kör enligt rekommendation"); it then applies to all groups named in the same message. Groups waiting for an answer are not run; say so briefly.
+   - If the user approves a group that has open questions without approving the recommendations (e.g. just "Kör A"): ask briefly whether to run with the recommendations before running.
+   - If a decision of this kind comes up during a run: stop that item and ask, instead of deciding; other items in the run continue.
    - Every time the proposal is shown or updated, the letters start again from A, in priority order. Letters always refer to the list most recently shown in the agent's own chat; older letters no longer apply. If the user replies with a letter that may refer to an older list: briefly confirm which group is meant before running.
    - If the proposal has more than ten groups: show the ten with the highest priority and state how many remain. The rest are shown if the user asks.
    - Save the proposal under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made.
@@ -80,7 +95,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
    - After a run: remove the groups that were run from "Proposed runs" and show the remaining groups with new letters from A.
    - If approved items turn out to be already done: list them at the top under "Redan klart sedan en tidigare session", without letters, and do not report them as results of the run.
    - Items the user has set aside for later get the status "Parkerad" in the backlog. Equivalent existing statuses (e.g. Deferred, Uppskjuten, Paused, Pausad) count as parked. They are not part of the proposal but are listed briefly under "Parkerat" after it.
-   - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups shown in the current proposal, never parked items or groups not shown. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
+   - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups shown in the current proposal that are ready to run, never parked items, groups waiting for an answer or groups not shown. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
    - Commits and reports use item IDs, not the letters.
    - Example (written in Swedish in the chat):
      - **A** – <modell>, <nivå> – Poäng och tidtagning efter omstart
@@ -90,12 +105,16 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
        - D-010 – Ta fram en design för lobbyn
        - F-007 – Lägg till rumskoder så att spelare kan bjudas in
        - F-009 – Lägg till en kö när rummet är fullt
+       - Fråga B1: Ska rumskoden vara siffror eller ord? Rekommendation: fyra siffror, lätt att skriva på mobilen.
+     - **C** – <modell>, <nivå> – Topplista – väntar på svar
+       - F-012 – Lägg till en topplista
+       - Fråga C1: Gemensam för alla tider eller nollställd varje vecka? Ingen rekommendation, det beror på vad du vill med spelet.
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.
 7. By default, the changes must be published and visible after a run. If the project needs an extra step to publish (e.g. a push to a release branch), it is part of the run. A project may instead use test builds if the user has chosen so (recorded as a decision in HANDOFF.md): the run then produces a test build with a direct link, and publishing happens only when the user approves, e.g. "Publicera". If main publishes directly, the changes stay on a branch with a preview until then, and automatic merge is not used. Project rules requiring review before main (e.g. a pull request) are treated as this choice. If automatic publishing is missing entirely: suggest a one-time action that makes it possible. Check the published site when possible. If it is broken after a run: restore the last working version at once, then report what happened. If the publishing method is unknown, find out during inventory or ask the user; never report something as published without having verified it.
 8. Deleting tracked files that approved work requires is covered by the go-ahead. Files not tracked by git, force push and rewritten history require an explicit yes.
-9. Report all IDs with a short status. Never claim more than has been verified: distinguish between changed in code, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site when available; a commit only as a clickable link, never as a written-out hash.
+9. Report all IDs with a short status, in the format in REPLY FORMAT. Never claim more than has been verified: distinguish in plain words between changed, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site when available; a commit only as a clickable link, never as a written-out hash.
 
 ## SEVERAL AGENTS IN THE SAME REPO
 - Before starting on an item: mark it as "Pågår" with the date in the backlog and push that. Do not touch items another agent has marked. If a mark is more than a day old: ask the user.
@@ -117,8 +136,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Project language (the product's own text that players and users see, and README) is English by default for new projects. For existing projects, the language of the existing product text is the project language unless the user says otherwise. If the user specifies another language for a project, follow it without objection. Record the project language in HANDOFF.md.
 - Code, code comments, commits and issues are in English unless the user says otherwise.
 - Never translate existing product text or README unless the user asks or approves it in the adaptation plan.
-- Short replies, but never leave out important information.
-- Avoid technical details the user does not need (e.g. hashes, metrics, file names, internal workings). Describe what changed and what it gives in plain words; the details go in documentation and commits. State the verification level briefly in plain words (e.g. "publicerad, inte provad på din telefon"), without technical evidence unless the user asks.
+- Length and technical detail: see REPLY FORMAT.
 - No running commentary during work, unless something important needs the user's attention.
 - When something unclear affects the result: ask rather than guess.
 - When an ID is mentioned in the chat, always follow it with a short explanation, e.g. "B-012 (buzzern på iPad)". Never just the number.

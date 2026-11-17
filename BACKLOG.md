@@ -10,9 +10,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| AR-021 | I utkast | Agents still write long technical reports despite the rule: it is buried and abstract. Add a short REPLY FORMAT section near the top with a report template (about ten lines), a self-check before sending and a before/after example. | User, 2026-11-17 |
-| AR-022 | I utkast | Command "Regelkoll": the agent confirms/re-reads the latest rules and rewrites its latest reply if it breaks them. | User, 2026-11-17 |
-| AR-023 | I utkast | Run groups were proposed with uninvestigated decisions, and agents made big direction choices themselves. Decisions are listed as questions with recommendations; groups without one wait for an answer; "rek" (any clear wording) approves recommendations; plain "Kör" with open questions triggers a short question (safety first). | User, 2026-11-17 |
+| – | – | No open proposals | – |
 
 ## Published / declined
 
@@ -38,3 +36,6 @@ Proposals for changes to the global agent rules (AGENTS.md).
 | AR-018 | Publicerad | 1.9 | "Link to the commit" pulled against "avoid hashes": commits only as clickable links. Published directly at the user's request. |
 | AR-019 | Publicerad | 1.9 | The version example in the confirmation line had to be bumped by hand: written as vX.Y. Published directly at the user's request. |
 | AR-020 | Publicerad | 1.9 | Run groups beyond Z had no rule: continue with AA, AB; show at most ten groups at a time. Published directly at the user's request. |
+| AR-021 | Publicerad | 1.10 | Agents still write long technical reports despite the rule: it is buried and abstract. Add a short REPLY FORMAT section near the top with a report template (about ten lines), a self-check before sending and a before/after example. |
+| AR-022 | Publicerad | 1.10 | Command "Regelkoll": the agent confirms/re-reads the latest rules and rewrites its latest reply if it breaks them. |
+| AR-023 | Publicerad | 1.10 | Run groups were proposed with uninvestigated decisions, and agents made big direction choices themselves. Decisions are listed as questions with recommendations; groups without one wait for an answer; "rek" (any clear wording) approves recommendations; plain "Kör" with open questions triggers a short question (safety first). |
