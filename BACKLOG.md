@@ -12,6 +12,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 |---|---|---|---|
 | AR-025 | I utkast | Buttons were shown for every question and felt cluttered. Use buttons only for runs; other questions as plain text. | User, 2026-11-17 |
 | AR-026 | I utkast | Question labels like "Fråga A1" changed when groups were re-lettered, so answers could land on the wrong question, and clashed with fixed project series (critical: SB1, BV1). Use fixed labels Q1, Q2 … (lowest free number); project series take precedence. | critical agent via user, 2026-11-17 |
+| AR-027 | I utkast | Risk of being flooded with questions when up to ten groups are proposed. Show questions only for the top groups, at most about five per proposal; the rest are saved and shown later, never skipped, and such groups are not ready to run. | User, 2026-11-17 |
 
 ## Published / declined
 
