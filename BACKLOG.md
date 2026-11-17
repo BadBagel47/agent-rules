@@ -10,7 +10,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| AR-024 | I utkast | Show choices as buttons when the environment supports it (max four per question), otherwise code blocks; only at real decision points. | User, 2026-11-17 |
+| – | – | No open proposals | – |
 
 ## Published / declined
 
@@ -39,3 +39,4 @@ Proposals for changes to the global agent rules (AGENTS.md).
 | AR-021 | Publicerad | 1.10 | Agents still write long technical reports despite the rule: it is buried and abstract. Add a short REPLY FORMAT section near the top with a report template (about ten lines), a self-check before sending and a before/after example. |
 | AR-022 | Publicerad | 1.10 | Command "Regelkoll": the agent confirms/re-reads the latest rules and rewrites its latest reply if it breaks them. |
 | AR-023 | Publicerad | 1.10 | Run groups were proposed with uninvestigated decisions, and agents made big direction choices themselves. Decisions are listed as questions with recommendations; groups without one wait for an answer; "rek" (any clear wording) approves recommendations; plain "Kör" with open questions triggers a short question (safety first). |
+| AR-024 | Publicerad | 1.11 | Show choices as buttons when the environment supports it (max four per question), otherwise code blocks; only at real decision points. |

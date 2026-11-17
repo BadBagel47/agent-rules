@@ -1,5 +1,6 @@
 # Changelog – global agent rules
 
+- 1.11 (2026-11-17): Choices are shown as buttons when the environment supports it, otherwise as code blocks (AR-024).
 - 1.10 (2026-11-17):
   - New REPLY FORMAT section near the top: plain words, no hashes/file names/metrics, report template of about ten lines, self-check before sending, before/after example (AR-021).
   - Command "Regelkoll": confirm/re-read the latest rules and check the latest reply against them (AR-022).

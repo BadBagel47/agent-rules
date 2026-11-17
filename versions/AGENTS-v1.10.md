@@ -1,5 +1,3 @@
-> **DRAFT – NOT IN EFFECT.** The rules in effect are in [AGENTS.md](../AGENTS.md).
-
 # AGENT RULES, version 1.10 (2026-11-17)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
@@ -21,7 +19,6 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Example (Swedish):
   - Too technical: "B-015 rättad i commit 0ee2489. Texturen filtreras med två utjämningspass över tre texlar. 250 tester passerar. Flimret minskade från 2,42 till 0,77 steg."
   - Right: "B-015 (Vintergatan gungar) – rättad och publicerad; gungandet bör ha minskat till ungefär en tredjedel. Inte provad på din telefon. Kvar för dig: dra runt himlen och säg om det är borta eller bara mindre."
-- When the user should choose between clear options (e.g. approving a plan, "Publicera reglerna", "Kör A rek"), show them as buttons if the environment has a tool for that (at most four options per question; the user can always write their own answer). Otherwise give each reply text in its own code block. Use buttons only at real decision points.
 - "Regelkoll": when the user writes it, first fetch the latest global agent rules and confirm the version (re-read them if they are newer). Then check your latest reply against the rules: if it breaks them, rewrite it; otherwise say briefly that it follows them.
 
 ## ON START
