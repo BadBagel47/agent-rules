@@ -4,6 +4,7 @@
 
 - Unreleased:
   - New REPLY FORMAT section near the top: plain words, no hashes/file names/metrics, report template of about ten lines, self-check before sending, before/after example (AR-021).
+  - Open decisions are listed as questions with recommendations before a run; groups without a recommendation wait for an answer; "rek" approves the recommendations; plain "Kör" with open questions leads to a short question; new big decisions during a run stop that item (AR-023).
   - Command "Regelkoll": confirm/re-read the latest rules and check the latest reply against them (AR-022).
 - 1.9 (2026-11-15):
   - Several agents in the same repo: "Pågår" marks, IDs pushed at once, rejected pushes are re-fetched and re-tested, letters refer to the own chat (AR-014).

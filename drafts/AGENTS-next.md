@@ -83,6 +83,11 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
 3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run. Only suggest models and levels available in the agent's own environment, which the user can select there, never models from other providers.
    - Each proposed run group gets a letter (A, B, C …). After Z the series continues with AA, AB, AC and so on. Format: a heading line with letter – model and level – short description, and below it one line per ID that briefly says what will be done and what it gives, not only the problem. This also applies to groups with a single ID. Longer explanations only when the user asks.
+   - Before a group is proposed, investigate which decisions it needs. Decisions that shape the solution or the product (e.g. game rules, design, choice of service, things that are hard to change later) are listed under the group as questions (e.g. "Fråga A1"), each with the agent's recommendation. Small technical choices are made by the agent.
+   - A group with a question the agent cannot recommend an answer to is marked "väntar på svar" and is not ready to run until the user has answered.
+   - The user may answer the questions, or approve the recommendations with any wording that clearly means so (e.g. "Kör A rek", "Kör A, B med rek", "Kör enligt rekommendation"); it then applies to all groups named in the same message. Groups waiting for an answer are not run; say so briefly.
+   - If the user approves a group that has open questions without approving the recommendations (e.g. just "Kör A"): ask briefly whether to run with the recommendations before running.
+   - If a decision of this kind comes up during a run: stop that item and ask, instead of deciding; other items in the run continue.
    - Every time the proposal is shown or updated, the letters start again from A, in priority order. Letters always refer to the list most recently shown in the agent's own chat; older letters no longer apply. If the user replies with a letter that may refer to an older list: briefly confirm which group is meant before running.
    - If the proposal has more than ten groups: show the ten with the highest priority and state how many remain. The rest are shown if the user asks.
    - Save the proposal under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made.
@@ -92,7 +97,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
    - After a run: remove the groups that were run from "Proposed runs" and show the remaining groups with new letters from A.
    - If approved items turn out to be already done: list them at the top under "Redan klart sedan en tidigare session", without letters, and do not report them as results of the run.
    - Items the user has set aside for later get the status "Parkerad" in the backlog. Equivalent existing statuses (e.g. Deferred, Uppskjuten, Paused, Pausad) count as parked. They are not part of the proposal but are listed briefly under "Parkerat" after it.
-   - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups shown in the current proposal, never parked items or groups not shown. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
+   - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups shown in the current proposal that are ready to run, never parked items, groups waiting for an answer or groups not shown. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
    - Commits and reports use item IDs, not the letters.
    - Example (written in Swedish in the chat):
      - **A** – <modell>, <nivå> – Poäng och tidtagning efter omstart
@@ -102,6 +107,10 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
        - D-010 – Ta fram en design för lobbyn
        - F-007 – Lägg till rumskoder så att spelare kan bjudas in
        - F-009 – Lägg till en kö när rummet är fullt
+       - Fråga B1: Ska rumskoden vara siffror eller ord? Rekommendation: fyra siffror, lätt att skriva på mobilen.
+     - **C** – <modell>, <nivå> – Topplista – väntar på svar
+       - F-012 – Lägg till en topplista
+       - Fråga C1: Gemensam för alla tider eller nollställd varje vecka? Ingen rekommendation, det beror på vad du vill med spelet.
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.

@@ -12,6 +12,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 |---|---|---|---|
 | AR-021 | I utkast | Agents still write long technical reports despite the rule: it is buried and abstract. Add a short REPLY FORMAT section near the top with a report template (about ten lines), a self-check before sending and a before/after example. | User, 2026-11-17 |
 | AR-022 | I utkast | Command "Regelkoll": the agent confirms/re-reads the latest rules and rewrites its latest reply if it breaks them. | User, 2026-11-17 |
+| AR-023 | I utkast | Run groups were proposed with uninvestigated decisions, and agents made big direction choices themselves. Decisions are listed as questions with recommendations; groups without one wait for an answer; "rek" (any clear wording) approves recommendations; plain "Kör" with open questions triggers a short question (safety first). | User, 2026-11-17 |
 
 ## Published / declined
 
