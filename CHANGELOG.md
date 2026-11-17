@@ -1,5 +1,14 @@
 # Changelog – global agent rules
 
+- 1.12 (2026-11-17):
+  - From the simulation: projects with fixed question series keep labels in the saved proposal; equivalent statuses for "Pågår" count; only a pull request the user must approve means test builds (AR-033).
+  - "Pågår" marks state the branch or session and are removed when done, parked or stopped; the saved run proposal is a snapshot; an agent only changes its own repo; a backlog tool named in the project's AGENTS.md is used (AR-031).
+  - IDs from other repos are written with the repo name in front; the repo's own IDs stay short; renamed repos keep the old name as an alias (AR-030).
+  - Run proposals gathered in their own section (RUN PROPOSALS), shorter and ordered as the agent works; fixed conflicts: "Kör alla" with open questions asks once, question labels are per chat, answers are recorded as decisions, groups building on something not ready are not ready, file names allowed for manual steps, the ten-line limit applies to result reports only (AR-029).
+  - Buttons only for runs; other questions as plain text (AR-025).
+  - At most about five questions per proposal, only for the top groups; the rest are saved and shown later, never skipped (AR-027).
+  - Run proposals start with a line stating what the order is based on; dependencies between groups are shown ("bygger på A") and respected (AR-028).
+  - Questions in run proposals get fixed labels Q1, Q2 … that do not follow group letters; lowest free number; project series take precedence (AR-026).
 - 1.11 (2026-11-17): Choices are shown as buttons when the environment supports it, otherwise as code blocks (AR-024).
 - 1.10 (2026-11-17):
   - New REPLY FORMAT section near the top: plain words, no hashes/file names/metrics, report template of about ten lines, self-check before sending, before/after example (AR-021).
