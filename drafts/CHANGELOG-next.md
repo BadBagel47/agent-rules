@@ -5,6 +5,7 @@
 - Unreleased:
   - Buttons only for runs; other questions as plain text (AR-025).
   - At most about five questions per proposal, only for the top groups; the rest are saved and shown later, never skipped (AR-027).
+  - Run proposals start with a line stating what the order is based on; dependencies between groups are shown ("bygger på A") and respected (AR-028).
   - Questions in run proposals get fixed labels Q1, Q2 … that do not follow group letters; lowest free number; project series take precedence (AR-026).
 - 1.11 (2026-11-17): Choices are shown as buttons when the environment supports it, otherwise as code blocks (AR-024).
 - 1.10 (2026-11-17):

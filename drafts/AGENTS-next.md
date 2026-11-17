@@ -84,6 +84,8 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
 3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run. Only suggest models and levels available in the agent's own environment, which the user can select there, never models from other providers.
    - Each proposed run group gets a letter (A, B, C …). After Z the series continues with AA, AB, AC and so on. Format: a heading line with letter – model and level – short description, and below it one line per ID that briefly says what will be done and what it gives, not only the problem. This also applies to groups with a single ID. Longer explanations only when the user asks.
+   - Start the proposal with one line stating what the order is based on, e.g. "Prioriterat för: spelbart så snabbt som möjligt", "säkerhet och synliga fel först", "lätta fixar först" or "stabil grund före nya funktioner". The user may change it (e.g. "prioritera lätta fixar"); a lasting choice is recorded as a decision in HANDOFF.md. The user's own priorities always come first.
+   - Dependencies: if a group builds on another group (it will not work, or not work well, until the other is done), say so on its heading line (e.g. "bygger på A") and always place it after that group. If the user asks to run a group before what it builds on: warn briefly and ask before running. "Kör alla" runs groups in dependency order.
    - Before a group is proposed, investigate which decisions it needs. Decisions that shape the solution or the product (e.g. game rules, design, choice of service, things that are hard to change later) are listed under the group as questions with fixed labels Q1, Q2 …, each with the agent's recommendation. A question keeps its label when groups are re-lettered. Only open questions have labels; answered or parked questions free theirs, and a new question gets the lowest free number. If a reply may refer to an earlier question with the same label: confirm briefly first. Project rules with their own fixed question series take precedence. Small technical choices are made by the agent.
    - To avoid flooding the user, investigate and show questions only for the highest-priority groups (about three) and at most about five questions per proposal; questions with a recommendation are shown briefly, those without are highlighted. Further questions are saved in the backlog with their item and shown in a later proposal; none are skipped. A group whose questions have not been shown and answered (or approved with "rek") is not ready to run.
    - A group with a question the agent cannot recommend an answer to is marked "väntar på svar" and is not ready to run until the user has answered.
@@ -102,6 +104,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
    - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups shown in the current proposal that are ready to run, never parked items, groups waiting for an answer or groups not shown. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
    - Commits and reports use item IDs, not the letters.
    - Example (written in Swedish in the chat):
+     - Prioriterat för: spelbart så snabbt som möjligt
      - **A** – <modell>, <nivå> – Poäng och tidtagning efter omstart
        - B-003 – Nollställ poängen vid omstart
        - B-005 – Starta om tidtagningen vid omstart
@@ -110,7 +113,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
        - F-007 – Lägg till rumskoder så att spelare kan bjudas in
        - F-009 – Lägg till en kö när rummet är fullt
        - Fråga Q1: Ska rumskoden vara siffror eller ord? Rekommendation: fyra siffror, lätt att skriva på mobilen.
-     - **C** – <modell>, <nivå> – Topplista – väntar på svar
+     - **C** – <modell>, <nivå> – Topplista – bygger på B – väntar på svar
        - F-012 – Lägg till en topplista
        - Fråga Q2: Gemensam för alla tider eller nollställd varje vecka? Ingen rekommendation, det beror på vad du vill med spelet.
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
