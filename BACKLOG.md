@@ -10,7 +10,8 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| – | – | No open proposals | – |
+| AR-021 | I utkast | Agents still write long technical reports despite the rule: it is buried and abstract. Add a short REPLY FORMAT section near the top with a report template (about ten lines), a self-check before sending and a before/after example. | User, 2026-11-17 |
+| AR-022 | I utkast | Command "Regelkoll": the agent confirms/re-reads the latest rules and rewrites its latest reply if it breaks them. | User, 2026-11-17 |
 
 ## Published / declined
 
