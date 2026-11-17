@@ -15,8 +15,8 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 
 ## REPLY FORMAT (applies to every reply)
 - Write for a user who does not read code: what was done, what it gives and what the user needs to do, in plain words. Short, but never leave out important information.
-- Never include hashes, file names, metrics, test counts, internal workings or technical evidence unless the user asks. They go in documentation and commits.
-- Report after a run, at most about ten lines: one line per ID with what changed and what it gives; one line with the verification level in plain words (e.g. "publicerad, inte provad på din telefon"); one line with what the user needs to do, if anything; then "Kvar" if there are run groups left.
+- Never include hashes, file names, metrics, test counts, internal workings or technical evidence unless the user asks or needs them for a manual step. They go in documentation and commits.
+- Result report after a run, at most about ten lines (run proposals, "Kvar" and adaptation plans follow their own formats): one line per ID with what changed and what it gives; one line with the verification level in plain words (e.g. "publicerad, inte provad på din telefon"); one line with what the user needs to do, if anything; then "Kvar" if there are run groups left, in the run proposal format.
 - Before sending a report: check it for hashes, file names, metrics and internal workings, and remove them.
 - Example (Swedish):
   - Too technical: "B-015 rättad i commit 0ee2489. Texturen filtreras med två utjämningspass över tre texlar. 250 tester passerar. Flimret minskade från 2,42 till 0,77 steg."
@@ -82,46 +82,64 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 ## WORKFLOW
 1. New bugs, features, planning and design are documented and collected for a combined run. They are not fixed immediately.
 2. For a reported bug, the agent should first try to locate it with simple tests before asking the user, e.g. reading code, running existing tests or reproducing the bug. The tests must not change code or data. Only ask about what cannot be found out independently.
-3. Suggest priority and group items that can be run together with the same model and level. Always recommend model and level before a run. Only suggest models and levels available in the agent's own environment, which the user can select there, never models from other providers.
-   - Each proposed run group gets a letter (A, B, C …). After Z the series continues with AA, AB, AC and so on. Format: a heading line with letter – model and level – short description, and below it one line per ID that briefly says what will be done and what it gives, not only the problem. This also applies to groups with a single ID. Longer explanations only when the user asks.
-   - Start the proposal with one line stating what the order is based on, e.g. "Prioriterat för: spelbart så snabbt som möjligt", "säkerhet och synliga fel först", "lätta fixar först" or "stabil grund före nya funktioner". The user may change it (e.g. "prioritera lätta fixar"); a lasting choice is recorded as a decision in HANDOFF.md. The user's own priorities always come first.
-   - Dependencies: if a group builds on another group (it will not work, or not work well, until the other is done), say so on its heading line (e.g. "bygger på A") and always place it after that group. If the user asks to run a group before what it builds on: warn briefly and ask before running. "Kör alla" runs groups in dependency order.
-   - Before a group is proposed, investigate which decisions it needs. Decisions that shape the solution or the product (e.g. game rules, design, choice of service, things that are hard to change later) are listed under the group as questions with fixed labels Q1, Q2 …, each with the agent's recommendation. A question keeps its label when groups are re-lettered. Only open questions have labels; answered or parked questions free theirs, and a new question gets the lowest free number. If a reply may refer to an earlier question with the same label: confirm briefly first. Project rules with their own fixed question series take precedence. Small technical choices are made by the agent.
-   - To avoid flooding the user, investigate and show questions only for the highest-priority groups (about three) and at most about five questions per proposal; questions with a recommendation are shown briefly, those without are highlighted. Further questions are saved in the backlog with their item and shown in a later proposal; none are skipped. A group whose questions have not been shown and answered (or approved with "rek") is not ready to run.
-   - A group with a question the agent cannot recommend an answer to is marked "väntar på svar" and is not ready to run until the user has answered.
-   - The user may answer the questions, or approve the recommendations with any wording that clearly means so (e.g. "Kör A rek", "Kör A, B med rek", "Kör enligt rekommendation"); it then applies to all groups named in the same message. Groups waiting for an answer are not run; say so briefly.
-   - If the user approves a group that has open questions without approving the recommendations (e.g. just "Kör A"): ask briefly whether to run with the recommendations before running.
-   - If a decision of this kind comes up during a run: stop that item and ask, instead of deciding; other items in the run continue.
-   - Every time the proposal is shown or updated, the letters start again from A, in priority order. Letters always refer to the list most recently shown in the agent's own chat; older letters no longer apply. If the user replies with a letter that may refer to an older list: briefly confirm which group is meant before running.
-   - If the proposal has more than ten groups: show the ten with the highest priority and state how many remain. The rest are shown if the user asks.
-   - Save the proposal under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made.
-   - In the saved proposal and any other saved document, state model recommendations as a neutral level (e.g. strong or standard model, high or medium level), since different agents read them. In the chat, the agent names its own models. Historical notes may keep model names.
-   - The user may reply e.g. "Kör A", "Kör A och C", "Kör alla" or "Kör alla med <modell>". Multiple groups are run in priority order; the order does not need to be mentioned in the report.
-   - Incomplete items are included in the next proposal once the user has provided what was needed.
-   - After a run: remove the groups that were run from "Proposed runs" and show the remaining groups with new letters from A.
-   - If approved items turn out to be already done: list them at the top under "Redan klart sedan en tidigare session", without letters, and do not report them as results of the run.
-   - Items the user has set aside for later get the status "Parkerad" in the backlog. Equivalent existing statuses (e.g. Deferred, Uppskjuten, Paused, Pausad) count as parked. They are not part of the proposal but are listed briefly under "Parkerat" after it.
-   - A broad go-ahead such as "Kör alla" or "Kör alla med <modell>" only covers the groups shown in the current proposal that are ready to run, never parked items, groups waiting for an answer or groups not shown. A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
-   - Commits and reports use item IDs, not the letters.
-   - Example (written in Swedish in the chat):
-     - Prioriterat för: spelbart så snabbt som möjligt
-     - **A** – <modell>, <nivå> – Poäng och tidtagning efter omstart
-       - B-003 – Nollställ poängen vid omstart
-       - B-005 – Starta om tidtagningen vid omstart
-     - **B** – <modell>, <nivå> – Flerspelarlobby
-       - D-010 – Ta fram en design för lobbyn
-       - F-007 – Lägg till rumskoder så att spelare kan bjudas in
-       - F-009 – Lägg till en kö när rummet är fullt
-       - Fråga Q1: Ska rumskoden vara siffror eller ord? Rekommendation: fyra siffror, lätt att skriva på mobilen.
-     - **C** – <modell>, <nivå> – Topplista – bygger på B – väntar på svar
-       - F-012 – Lägg till en topplista
-       - Fråga Q2: Gemensam för alla tider eller nollställd varje vecka? Ingen rekommendation, det beror på vad du vill med spelet.
+3. Propose runs and handle the user's go-ahead as described in RUN PROPOSALS.
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.
 7. By default, the changes must be published and visible after a run. If the project needs an extra step to publish (e.g. a push to a release branch), it is part of the run. A project may instead use test builds if the user has chosen so (recorded as a decision in HANDOFF.md): the run then produces a test build with a direct link, and publishing happens only when the user approves, e.g. "Publicera". If main publishes directly, the changes stay on a branch with a preview until then, and automatic merge is not used. Project rules requiring review before main (e.g. a pull request) are treated as this choice. If automatic publishing is missing entirely: suggest a one-time action that makes it possible. Check the published site when possible. If it is broken after a run: restore the last working version at once, then report what happened. If the publishing method is unknown, find out during inventory or ask the user; never report something as published without having verified it.
 8. Deleting tracked files that approved work requires is covered by the go-ahead. Files not tracked by git, force push and rewritten history require an explicit yes.
 9. Report all IDs with a short status, in the format in REPLY FORMAT. Never claim more than has been verified: distinguish in plain words between changed, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site when available; a commit only as a clickable link, never as a written-out hash.
+
+## RUN PROPOSALS
+Building the proposal
+- Group items that can run together with the same model and level. Recommend model and level for each group, only from what the agent's own environment offers and the user can select there, never from other providers. In saved documents, write a neutral level (e.g. strong or standard model, high or medium level); in the chat, name your own models. Historical notes may keep model names.
+- Start with one line stating what the order is based on, e.g. "Prioriterat för: spelbart så snabbt som möjligt", "säkerhet och synliga fel först", "lätta fixar först" or "stabil grund före nya funktioner". The user may change it; a lasting choice is recorded as a decision. The user's own priorities always come first.
+- Order the groups by priority and dependencies. If a group builds on another (it will not work, or not work well, until the other is done), say so on its heading line (e.g. "bygger på A") and place it after that group.
+- Letters A, B, C … (after Z: AA, AB …), starting again from A every time the proposal is shown or updated. Letters refer to the list most recently shown in the agent's own chat.
+- Format: a heading line with letter – model and level – short description (plus "bygger på X" or "väntar på svar" when relevant), and below it one line per ID that says what will be done and what it gives, not only the problem, also for single-ID groups. Longer explanations only when the user asks.
+- More than ten groups: show the ten first and state how many remain; the rest are shown if the user asks.
+- Parked items (status "Parkerad" or an equivalent such as Deferred, Uppskjuten, Paused, Pausad) are not part of the proposal; list them briefly under "Parkerat".
+- Save the proposal (without question labels) under "Proposed runs" in BACKLOG.md, or in HANDOFF.md if the backlog consists of several files, and replace it when a new proposal is made.
+
+Questions
+- For the groups nearest in turn (about the first three), investigate which decisions they need. Decisions that shape the solution or the product (e.g. game rules, design, choice of service, things that are hard to change later) are listed under the group as questions with the agent's recommendation. Small technical choices are made by the agent.
+- Show at most about five questions per proposal: those without a recommendation highlighted, those with one briefly. Further questions are saved with their item in the backlog and shown in a later proposal; none are skipped.
+- Questions are labelled Q1, Q2 … when shown, with the lowest free number, in the agent's own chat. A label stays with its question when groups are re-lettered and is freed when the question is answered or parked. Project rules with their own fixed question series take precedence.
+- Answers that shape the product are recorded as decisions in HANDOFF.md and are not asked again.
+
+When a group is ready to run
+- A group is ready when its questions are answered or their recommendations approved, and every group it builds on is done or runs before it in the same go-ahead.
+- A group with a question the agent cannot recommend an answer to is marked "väntar på svar" and is not ready until the user has answered. The same applies to a group that builds on something that is waiting or parked.
+
+The user's reply
+- E.g. "Kör A", "Kör A och C", "Kör alla" or "Kör alla med <modell>". "Rek" in any wording that clearly means it (e.g. "Kör A rek", "Kör A, B med rek", "Kör enligt rekommendation") approves the recommendations for all groups named in the message, or all shown groups for "Kör alla".
+- If the groups the user approved have open questions whose recommendations were not approved: ask once, briefly, whether to run with the recommendations, before running.
+- "Kör alla" covers only the groups shown in the current proposal, never parked items or groups that are not ready; say briefly which were left out.
+- If the user asks to run a group before what it builds on: warn briefly and ask first.
+- If a reply may refer to an older list or an earlier question with the same label: confirm briefly which is meant.
+- A parked item is only run if the user names it explicitly (e.g. "Kör B-004") or asks to bring it back; it then moves into the next proposal.
+
+During and after the run
+- Groups run in priority and dependency order; the order does not need to be mentioned in the report.
+- If a decision that shapes the solution or the product comes up during a run: stop that item and ask instead of deciding; the other items continue.
+- After the run: remove the groups that were run from "Proposed runs" and show the remaining groups under "Kvar", with new letters from A, in the same format.
+- Incomplete items return in the next proposal once the user has provided what was needed.
+- Approved items that turn out to be already done are listed at the top under "Redan klart sedan en tidigare session", without letters, and not reported as results of the run.
+- Commits and reports use item IDs, not the letters.
+
+Example (written in Swedish in the chat):
+- Prioriterat för: spelbart så snabbt som möjligt
+- **A** – <modell>, <nivå> – Poäng och tidtagning efter omstart
+  - B-003 – Nollställ poängen vid omstart
+  - B-005 – Starta om tidtagningen vid omstart
+- **B** – <modell>, <nivå> – Flerspelarlobby
+  - D-010 – Ta fram en design för lobbyn
+  - F-007 – Lägg till rumskoder så att spelare kan bjudas in
+  - Fråga Q1: Ska rumskoden vara siffror eller ord? Rekommendation: fyra siffror, lätt att skriva på mobilen.
+- **C** – <modell>, <nivå> – Topplista – bygger på B – väntar på svar
+  - F-012 – Lägg till en topplista
+  - Fråga Q2: Gemensam för alla tider eller nollställd varje vecka? Ingen rekommendation, det beror på vad du vill med spelet.
+- Parkerat: B-004 (motspelarens bräde laggar)
 
 ## SEVERAL AGENTS IN THE SAME REPO
 - Before starting on an item: mark it as "Pågår" with the date in the backlog and push that. Do not touch items another agent has marked. If a mark is more than a day old: ask the user.

@@ -3,6 +3,7 @@
 # Changelog – global agent rules
 
 - Unreleased:
+  - Run proposals gathered in their own section (RUN PROPOSALS), shorter and ordered as the agent works; fixed conflicts: "Kör alla" with open questions asks once, question labels are per chat, answers are recorded as decisions, groups building on something not ready are not ready, file names allowed for manual steps, the ten-line limit applies to result reports only (AR-029).
   - Buttons only for runs; other questions as plain text (AR-025).
   - At most about five questions per proposal, only for the top groups; the rest are saved and shown later, never skipped (AR-027).
   - Run proposals start with a line stating what the order is based on; dependencies between groups are shown ("bygger på A") and respected (AR-028).

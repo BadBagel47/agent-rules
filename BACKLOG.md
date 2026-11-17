@@ -14,6 +14,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 | AR-026 | I utkast | Question labels like "Fråga A1" changed when groups were re-lettered, so answers could land on the wrong question, and clashed with fixed project series (critical: SB1, BV1). Use fixed labels Q1, Q2 … (lowest free number); project series take precedence. | critical agent via user, 2026-11-17 |
 | AR-027 | I utkast | Risk of being flooded with questions when up to ten groups are proposed. Show questions only for the top groups, at most about five per proposal; the rest are saved and shown later, never skipped, and such groups are not ready to run. | User, 2026-11-17 |
 | AR-028 | I utkast | The user cannot see how a proposal is prioritized, and a group could be run before one it builds on. Show the prioritization basis in one line; mark dependencies ("bygger på A"), order by them and warn before running out of order. | User, 2026-11-17 |
+| AR-029 | I utkast | Review of the draft: contradictions between run-proposal rules ("Kör alla" vs open questions, question labels across agents, answers not recorded, investigate-all vs top three, dependencies on non-ready groups) and in REPLY FORMAT (file names for manual steps, ten-line limit vs proposals). Gathered into one RUN PROPOSALS section. | Draft review, 2026-11-17 |
 
 ## Published / declined
 
