@@ -3,6 +3,7 @@
 # Changelog – global agent rules
 
 - Unreleased:
+  - IDs from other repos are written with the repo name in front; the repo's own IDs stay short; renamed repos keep the old name as an alias (AR-030).
   - Run proposals gathered in their own section (RUN PROPOSALS), shorter and ordered as the agent works; fixed conflicts: "Kör alla" with open questions asks once, question labels are per chat, answers are recorded as decisions, groups building on something not ready are not ready, file names allowed for manual steps, the ten-line limit applies to result reports only (AR-029).
   - Buttons only for runs; other questions as plain text (AR-025).
   - At most about five questions per proposal, only for the top groups; the rest are saved and shown later, never skipped (AR-027).

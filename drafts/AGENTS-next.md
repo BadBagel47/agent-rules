@@ -78,6 +78,8 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - If no ID system exists: one shared running number series with prefixes: B-001 bug, F-002 feature, D-003 planning/design. (Not #, since GitHub links #123 to issues.)
 - If a different ID system exists: include its conversion in the adaptation plan, stating scope and consequences (number of items, old IDs remaining in commits and documents). If the existing system works, recommend keeping it; the user decides. Change nothing without approval.
 - Include the affected IDs in commit messages.
+- IDs belong to their own repo. An ID from another repo is always written with that repo's name in front, in the chat, documentation, commits and between agents (e.g. "network-kit B-007 (rummet stängs för tidigt)"); the repo's own IDs are written without it. Dependencies on another repo are referred to the same way (e.g. "väntar på network-kit F-003").
+- If a repo is renamed: record the old name in its HANDOFF.md ("tidigare X") so agents treat it as an alias, and update references in the current documents (e.g. HANDOFF.md and the backlog) of repos that refer to it. Old commits and logs keep the old name.
 
 ## WORKFLOW
 1. New bugs, features, planning and design are documented and collected for a combined run. They are not fixed immediately.
