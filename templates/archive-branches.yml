@@ -1,14 +1,17 @@
 name: Archive branches
 
 # Template from BadBagel47/agent-rules (based on the bricks workflow).
-# Use when the agent cannot push tags itself. List the branches to archive,
-# one per line, in .github/archive-branches.txt and push that file to main.
-# Each listed branch is tagged as archive/<branch>, the tag is verified on
-# origin, and only then is the branch deleted. The default branch is never
-# touched. A branch can be restored from its archive/<branch> tag.
+# Use when the agent cannot delete branches or push tags itself. List the
+# branches to remove, one per line, in .github/archive-branches.txt and push
+# that file (to main, or to the agent's own claude/ branch).
+# A branch that is fully merged into the default branch is deleted without a
+# tag, since nothing on it can be lost. Any other branch is first tagged as
+# archive/<branch>, the tag is verified on origin, and only then is the branch
+# deleted; it can be restored from that tag. The default branch and the branch
+# that pushed the list are never touched.
 on:
   push:
-    branches: [main]
+    branches: [main, 'claude/**']
     paths: ['.github/archive-branches.txt']
   workflow_dispatch:
 
@@ -29,13 +32,17 @@ jobs:
           set -euo pipefail
           git fetch origin '+refs/heads/*:refs/remotes/origin/*' --tags
           grep -v '^\s*#' .github/archive-branches.txt | sed '/^\s*$/d' | while read -r branch; do
-            if [ "$branch" = "$DEFAULT_BRANCH" ]; then
-              echo "::warning::$branch is the default branch and is never archived or deleted"; continue
+            if [ "$branch" = "$DEFAULT_BRANCH" ] || [ "$branch" = "$GITHUB_REF_NAME" ]; then
+              echo "::warning::$branch is the default branch or the branch that pushed the list, and is never deleted"; continue
             fi
             if ! git rev-parse -q --verify "refs/remotes/origin/$branch" >/dev/null; then
               echo "$branch: already gone"; continue
             fi
             sha=$(git rev-parse "refs/remotes/origin/$branch")
+            if git merge-base --is-ancestor "$sha" "refs/remotes/origin/$DEFAULT_BRANCH"; then
+              git push origin --delete "$branch"
+              echo "$branch: fully merged, deleted without a tag ($sha)"; continue
+            fi
             tag="archive/$branch"
             if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
               [ "$(git rev-parse "refs/tags/$tag^{commit}")" = "$sha" ] || { echo "::error::$tag exists but points elsewhere"; exit 1; }

@@ -45,9 +45,9 @@ Part of the global agent rules (AGENTS.md). Read when AGENTS.md says so: first s
 
 ## 5. Automatic merge to main
 - Needed when the agent can only push to its own branch. Not used when the project rules require the user's approval before main (then open a pull request and give the user a direct link) or when the project uses test builds. A pull request the agent may merge itself does not count as such a requirement.
-- The repo gets the GitHub Action .github/workflows/auto-merge.yml from templates/auto-merge.yml in agent-rules. It merges the agent's claude/ branches into main, triggers a GitHub Pages build if the repo uses Pages, and skips commits marked [wip]. Do not write your own variant and do not change the branch pattern. If the repo's file differs from the template: update it.
+- The repo gets the GitHub Action .github/workflows/auto-merge.yml from templates/auto-merge.yml in agent-rules. It merges the agent's claude/ branches into main, triggers a GitHub Pages build if the repo uses Pages, and skips commits marked [wip]. Do not write your own variant and do not change the branch pattern. A repo may extend the template with checks that must pass before the merge (e.g. tests), as long as the branch pattern and the [wip] skip remain; such extensions are kept. Otherwise, if the repo's file lacks something the template has: update it.
 - If the agent is refused (agents often may not create workflow files): give the user ready-made steps with the file name and the file content in separate code blocks, so it can be added once via github.com.
-- After pushing, check that the Action run succeeded, or say in the report that it needs checking. If the merge fails on a conflict: resolve it in the same session if possible, otherwise report it clearly.
+- After pushing, check that the Action run succeeded, or say in the report that it needs checking.
 
 ## 6. Renamed repo
 - Record the old name in the repo's HANDOFF.md ("tidigare X") so agents treat it as an alias, and update references in the current documents (HANDOFF.md, backlog) of repos that refer to it. Old commits and logs keep the old name.
