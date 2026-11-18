@@ -1,5 +1,3 @@
-> **DRAFT – NOT IN EFFECT.** Will be published as SETUP.md together with the next rules version.
-
 # SETUP AND ADAPTATION
 
 Part of the global agent rules (AGENTS.md). Read when AGENTS.md says so: first session in a repo, missing inventory, a new rules version, conflicts with project rules, or when automatic merge has to be set up.

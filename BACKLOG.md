@@ -10,8 +10,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| AR-032 | I utkast | Slim the rules after 1.12 without changing their meaning (about 4,600 words): shorter wording, move rules to where they belong (e.g. documentation rules out of ON START), test against the repos before publishing. Consider at the same time a common backlog format and a shared backlog tool template (based on tools/backlog.mjs in critical). | Draft review, 2026-11-17 |
-| AR-036 | I utkast | Simulation of the slimmed draft: the template rule would overwrite critical's test gate in auto-merge; pending adaptations were not shown when the version matched; merged work branches were never cleaned up (42 in critical); merge-conflict rule moved back to AGENTS.md. | Simulation, 2026-11-18 |
+| – | – | No open proposals | – |
 
 ## Published / declined
 
@@ -51,3 +50,5 @@ Proposals for changes to the global agent rules (AGENTS.md).
 | AR-033 | Publicerad | 1.12 | Simulation against critical, bricks and qlab46.net: saved proposals in projects with fixed question series keep their labels; equivalent statuses (e.g. In progress) count as "Pågår"; only a pull request the user must approve means test builds. |
 | AR-034 | Publicerad | 1.13 | Recurring web fixes (blue tap highlight and focus ring after taps; ugly, misplaced dropdown arrow) in a separate WEB.md read only in web projects, instead of lengthening AGENTS.md. |
 | AR-035 | Publicerad | 1.13 | Whole-draft review: [wip] did not protect when pushing directly to main; restoring a broken site did not say how (revert, not rewritten history); the sentence about groups with uninvestigated questions was lost in the RUN PROPOSALS rewrite; "Regelkoll" skipped WEB.md; two wordings about PR before main. |
+| AR-032 | Publicerad | 1.14 | Slim the rules after 1.12 without changing their meaning (about 4,600 words): shorter wording, move rules to where they belong (e.g. documentation rules out of ON START), test against the repos before publishing. Consider at the same time a common backlog format and a shared backlog tool template (based on tools/backlog.mjs in critical). |
+| AR-036 | Publicerad | 1.14 | Simulation of the slimmed draft: the template rule would overwrite critical's test gate in auto-merge; pending adaptations were not shown when the version matched; merged work branches were never cleaned up (42 in critical); merge-conflict rule moved back to AGENTS.md. |

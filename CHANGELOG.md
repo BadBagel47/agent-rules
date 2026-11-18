@@ -1,5 +1,8 @@
 # Changelog – global agent rules
 
+- 1.14 (2026-11-18):
+  - From the simulation: repos may extend the auto-merge template with checks before the merge; "Pending adaptation" triggers SETUP.md; old fully merged work branches are removed at session start (archive template deletes merged branches without a tag and can be triggered from a claude/ branch) (AR-036).
+  - Slimmed rules with unchanged meaning: AGENTS.md holds what is needed every session (about 3,100 words instead of 5,000); setup, inventory, new versions, the adaptation plan and automatic merge moved to SETUP.md, read only when needed; each rule in one place (AR-032).
 - 1.13 (2026-11-18):
   - Review of the whole draft: unfinished code goes to a work branch, never main; a broken site is restored with a revert commit; groups not yet investigated are investigated before they start; "Regelkoll" also re-reads WEB.md; automatic merge wording aligned with test builds (AR-035).
   - New WEB.md with web basics (no blue tap highlight, focus ring only for keyboard, own SVG arrow in dropdown menus), read only in web projects; one line in AGENTS.md points to it. Web basics are never applied without the user's go-ahead; changes to WEB.md get a new rules version (AR-034).

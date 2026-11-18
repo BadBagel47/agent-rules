@@ -14,7 +14,7 @@ Applies only when working in BadBagel47/agent-rules.
   3. In CHANGELOG.md, replace "Unreleased" with a line: version, date and a short description of what changed.
   4. Mark the published proposals as Publicerad in BACKLOG.md with the version.
   5. Delete the drafts.
-- WEB.md is part of the rules: every change to it goes through the same backlog, draft (drafts/WEB-next.md) and publication, gets a new rules version and is listed in CHANGELOG.md, so that repos notice it.
+- SETUP.md and WEB.md are part of the rules: every change to them goes through the same backlog, draft (drafts/SETUP-next.md, drafts/WEB-next.md) and publication, gets a new rules version and is listed in CHANGELOG.md, so that repos notice it. Keep each rule in one place, and keep AGENTS.md to what is needed every session.
 - The rules are written in English. The user may describe the change in Swedish.
 - Commit and push to main per the normal rules and report the new version.
 - After every publication, give the user this message in its own code block, to paste into the agent of any repo. It works whether or not the repo has followed the rules before, and it names no version:

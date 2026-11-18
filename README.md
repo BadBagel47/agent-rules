@@ -4,6 +4,7 @@ Global agent rules for AI coding agents working in BadBagel47's repositories. Ru
 
 - `AGENTS.md` – the current rules (single source of truth)
 - `templates/` – files agents copy into project repos (e.g. `auto-merge.yml`)
+- `SETUP.md` – setup, inventory, new versions, adaptation plan and automatic merge; read only when AGENTS.md says so
 - `WEB.md` – web basics, read only in web projects
 - `CHANGELOG.md` – what changed in each version
 - `BACKLOG.md` – proposals for changes to the rules (IDs AR-001 …)
