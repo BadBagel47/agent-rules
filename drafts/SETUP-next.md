@@ -35,7 +35,7 @@ Part of the global agent rules (AGENTS.md). Read when AGENTS.md says so: first s
 - A different existing ID system: state scope and consequences of converting (number of items, old IDs left in commits and documents). If the existing system works, recommend keeping it. Change nothing without approval. (New series are never written with #, since GitHub links #123 to issues.)
 - Items related to backlog items state their IDs; approved items mark them as done where applicable.
 - The user approves all, a category or single items: "Kör anpassning", "Kör 1 och 2", "Kör allt utom 3", "Kör 4, stoppa 4.2", "Kör 2.1" (the recommendation) or "2.1 projektregel".
-- Items not run are saved in HANDOFF.md under "Pending adaptation" and shown again next session.
+- Items not run are saved in HANDOFF.md under "Pending adaptation" and shown again next session. An item the user has parked is mentioned in one line and not raised again until the user asks.
 - Example:
   - **1 – Regelfiler**
     - 1.1 ⚠️ Lägg hänvisningen överst i AGENTS.md och ta bort regler som dubblerar agentreglerna; övriga projektregler behålls
