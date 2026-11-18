@@ -6,13 +6,15 @@ Basics the user always wants in web projects (websites and web apps). Read toget
 
 ## How to apply
 - **New web projects:** include everything below from the start.
-- **Existing web projects:** include what is missing as one item in the adaptation plan, so the user approves it once per repo. Record the approval as a decision in HANDOFF.md.
+- **Existing web projects:** include what is missing as one item in the adaptation plan, so the user approves it once per repo. Record the approval as a decision in HANDOFF.md. These basics change the product, so they are never applied without the user's go-ahead, also when a new point is added here in a minor rules version. Once approved, the normal steps apply: verify, publish and report.
 - Keep the project's own look: adapt colours and sizes to the project's design, but do not drop any point below without the user's approval (record it as a decision).
-- Verify on a phone-sized screen and with keyboard navigation before reporting it as done.
+- Verify on a phone-sized screen and with keyboard navigation when the environment allows it. Otherwise say in plain words that it has not been tried.
 - A recurring web problem the user points out is proposed as a new point here (via the backlog in agent-rules), not as a project rule in each repo.
 
 ## 1. No blue tap highlight or focus ring after a tap or click
 On mobile, tapping a button or link must not show a blue highlight, and the focus ring must only show for keyboard users (`:focus-visible`), not after a tap or click. Never remove the focus ring for keyboard users. If the project already has its own focus style, keep it and apply it with `:focus-visible`.
+- Text fields are an exception: browsers always show the focus ring there, also after a tap, so the user sees where they are typing. Keep it, in the project's colours instead of the browser's blue.
+- Without the tap highlight nothing shows that a tap registered, so buttons and links must have their own pressed state (`:active`), in the project's style.
 
 ```css
 /* No blue tap highlight on mobile */
@@ -24,7 +26,7 @@ On mobile, tapping a button or link must not show a blue highlight, and the focu
 ```
 
 ## 2. Own arrow in dropdown menus
-The browser's own arrow in `<select>` looks different on every device and sits too far to the right. Replace it with an SVG arrow placed a little in from the right edge, with room for the text. Change the arrow colour (`%23888` = #888) to match the project's text colour; with both light and dark themes, set one arrow per theme.
+The browser's own arrow in `<select>` looks different on every device and sits too far to the right. Replace it with an SVG arrow placed a little in from the right edge, with room for the text. Change the arrow colour (`%23888` = #888) to match the project's text colour; with both light and dark themes, set one arrow per theme. Dropdowns built without `<select>` use the same SVG arrow; never text characters such as ▼ or ▾, which look different on every device.
 
 ```css
 select:not([multiple]):not([size]) {
