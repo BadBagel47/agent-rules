@@ -1,5 +1,8 @@
 # Changelog – global agent rules
 
+- 1.13 (2026-11-18):
+  - Review of the whole draft: unfinished code goes to a work branch, never main; a broken site is restored with a revert commit; groups not yet investigated are investigated before they start; "Regelkoll" also re-reads WEB.md; automatic merge wording aligned with test builds (AR-035).
+  - New WEB.md with web basics (no blue tap highlight, focus ring only for keyboard, own SVG arrow in dropdown menus), read only in web projects; one line in AGENTS.md points to it. Web basics are never applied without the user's go-ahead; changes to WEB.md get a new rules version (AR-034).
 - 1.12 (2026-11-17):
   - From the simulation: projects with fixed question series keep labels in the saved proposal; equivalent statuses for "Pågår" count; only a pull request the user must approve means test builds (AR-033).
   - "Pågår" marks state the branch or session and are removed when done, parked or stopped; the saved run proposal is a snapshot; an agent only changes its own repo; a backlog tool named in the project's AGENTS.md is used (AR-031).

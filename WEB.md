@@ -1,5 +1,3 @@
-> **DRAFT – NOT IN EFFECT.** Will be published as WEB.md together with the next rules version.
-
 # WEB BASICS
 
 Basics the user always wants in web projects (websites and web apps). Read together with the global agent rules (AGENTS.md).

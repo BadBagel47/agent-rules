@@ -1,4 +1,4 @@
-# AGENT RULES, version 1.12 (2026-11-17)
+# AGENT RULES, version 1.13 (2026-11-18)
 
 Global agent rules for all AI agents working in the user's GitHub repositories.
 
@@ -20,7 +20,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
   - Too technical: "B-015 rättad i commit 0ee2489. Texturen filtreras med två utjämningspass över tre texlar. 250 tester passerar. Flimret minskade från 2,42 till 0,77 steg."
   - Right: "B-015 (Vintergatan gungar) – rättad och publicerad; gungandet bör ha minskat till ungefär en tredjedel. Inte provad på din telefon. Kvar för dig: dra runt himlen och säg om det är borta eller bara mindre."
 - Buttons are used only for runs: when a run proposal is shown, offer the most likely replies (e.g. "Kör A", "Kör A rek", "Kör alla") as buttons if the environment has a tool for that (at most four options). All other questions are asked as plain text, with reply text in its own code block when needed.
-- "Regelkoll": when the user writes it, first fetch the latest global agent rules and confirm the version (re-read them if they are newer). Then check your latest reply against the rules: if it breaks them, rewrite it; otherwise say briefly that it follows them.
+- "Regelkoll": when the user writes it, first fetch the latest global agent rules (and WEB.md in web projects) and confirm the version (re-read them if they are newer). Then check your latest reply against the rules: if it breaks them, rewrite it; otherwise say briefly that it follows them.
 
 ## ON START
 - This is the original: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/AGENTS.md. Read it at the start of every session. If the link cannot be read: fetch AGENTS.md from the repo BadBagel47/agent-rules via GitHub instead. If neither works: say so immediately.
@@ -33,6 +33,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - "main" in these rules means the repo's default branch, even if it has another name (e.g. master).
 - Sync with the latest main before starting work and before assigning new IDs.
 - Always read HANDOFF.md at the start of every session.
+- In web projects (websites and web apps): also read and follow WEB.md: https://raw.githubusercontent.com/BadBagel47/agent-rules/main/WEB.md. If the link cannot be read: fetch WEB.md from the repo BadBagel47/agent-rules via GitHub instead.
 - Check which tools, permissions and access the environment has (e.g. push to main, creating workflow files, GitHub API) instead of assuming. Note limitations in HANDOFF.md with the date.
 - If HANDOFF.md is missing, or lacks the line "Inventory: YYYY-MM-DD" (or an equivalent existing note, which is then rewritten to that format without a new inventory): automatically do a thorough inventory of the repo (all branches – first make sure every remote branch is visible, e.g. compare with `git ls-remote --heads` and fetch all branches if the checkout only fetched one – open PRs and Issues, existing documentation, how the repo is published, e.g. branch, Action or external service). Record the line "Inventory: YYYY-MM-DD" and the publishing method in HANDOFF.md. After that, selective reading applies.
 - Before creating documentation: search for existing documentation (e.g. bug lists, TODO, handoff, regardless of file name or language) on all branches, open PRs and Issues, not just main. If found: include moving content that duplicates HANDOFF.md or BACKLOG.md into the new structure, with a mapping between old and new IDs, in the adaptation plan.
@@ -65,7 +66,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 - Keep up to date: HANDOFF.md (current state, next steps, rules version, project language, publishing method, decisions, and goals and way of working as their own sections or as links to separate documents) and features and bugs (BACKLOG.md).
 - Other existing documents (e.g. specifications, plans, logs, changelogs, investigations, ADRs) are kept and linked from a documentation map in HANDOFF.md or the project's AGENTS.md. Only content that duplicates HANDOFF.md or BACKLOG.md is moved.
 - HANDOFF.md describes the current state briefly and must not grow into a log. A short list of the latest entries (about five) is fine; older history belongs in git, changelogs or log documents.
-- If work cannot be finished in the session: first record in HANDOFF.md exactly where it stopped and how to continue, and push that. Then push the unfinished code with [wip] in the commit message, so it is not merged automatically or published.
+- If work cannot be finished in the session: first record in HANDOFF.md exactly where it stopped and how to continue, and push that. Then push the unfinished code to a work branch (claude/…), never to main, with [wip] in the commit message, so it is not merged automatically or published.
 - If the repo has a tool for the backlog and the project's AGENTS.md names it, use it for the steps it covers (e.g. marking items, moving them to done or parked, re-lettering, next free ID, checking) instead of editing by hand.
 - Completed items are moved to a done section in BACKLOG.md, not deleted.
 - Priority uses a fixed scale in the documentation: High, Medium, Low (or the Swedish Hög, Medel, Låg).
@@ -88,7 +89,7 @@ Global agent rules for all AI agents working in the user's GitHub repositories.
 4. Wait for a go-ahead ("Kör" or similar) before making code changes. A go-ahead covers the approved items until they are done; do not ask again for the same work. Ask again only if the scope changes. Documentation (HANDOFF.md, the backlog and the reference in the project's AGENTS.md) may be saved and pushed without a go-ahead. Changes to project rules require the user's approval.
 5. Verify before pushing: run existing tests or the build and check that the site or app starts without errors.
 6. After a run: commit and push directly to main, unless the user has said otherwise. Do everything possible without manual steps from the user. If the environment does not allow pushing to main: merge via PR yourself if permitted. If that also fails: use automatic merge (see below). If the agent works on a branch other than main, the changes must reach main in the same run, not at a later time.
-7. By default, the changes must be published and visible after a run. If the project needs an extra step to publish (e.g. a push to a release branch), it is part of the run. A project may instead use test builds if the user has chosen so (recorded as a decision in HANDOFF.md): the run then produces a test build with a direct link, and publishing happens only when the user approves, e.g. "Publicera". If main publishes directly, the changes stay on a branch with a preview until then, and automatic merge is not used. Project rules requiring the user's approval before main (e.g. a pull request the user must approve) are treated as this choice; a pull request the agent may merge itself is just a way to reach main. If automatic publishing is missing entirely: suggest a one-time action that makes it possible. Check the published site when possible. If it is broken after a run: restore the last working version at once, then report what happened. If the publishing method is unknown, find out during inventory or ask the user; never report something as published without having verified it.
+7. By default, the changes must be published and visible after a run. If the project needs an extra step to publish (e.g. a push to a release branch), it is part of the run. A project may instead use test builds if the user has chosen so (recorded as a decision in HANDOFF.md): the run then produces a test build with a direct link, and publishing happens only when the user approves, e.g. "Publicera". If main publishes directly, the changes stay on a branch with a preview until then, and automatic merge is not used. Project rules requiring the user's approval before main (e.g. a pull request the user must approve) are treated as this choice; a pull request the agent may merge itself is just a way to reach main. If automatic publishing is missing entirely: suggest a one-time action that makes it possible. Check the published site when possible. If it is broken after a run: restore the last working version at once with a new commit that reverts the change, never by rewriting history, then report what happened. If the publishing method is unknown, find out during inventory or ask the user; never report something as published without having verified it.
 8. Deleting tracked files that approved work requires is covered by the go-ahead. Files not tracked by git, force push and rewritten history require an explicit yes.
 9. Report all IDs with a short status, in the format in REPLY FORMAT. Never claim more than has been verified: distinguish in plain words between changed, tested, published and verified by the user. Incomplete items are listed separately with what is needed to continue. Run groups not yet run are listed under "Kvar" in the same format as the proposal. Link to the published site when available; a commit only as a clickable link, never as a written-out hash.
 
@@ -111,6 +112,7 @@ Questions
 
 When a group is ready to run
 - A group is ready when its questions are answered or their recommendations approved, and every group it builds on is done or runs before it in the same go-ahead.
+- A group whose decisions have not yet been investigated is investigated before it starts. If questions come up, that group waits for the user's answer while the other approved groups continue.
 - A group with a question the agent cannot recommend an answer to is marked "väntar på svar" and is not ready until the user has answered. The same applies to a group that builds on something that is waiting or parked.
 
 The user's reply
@@ -149,7 +151,7 @@ Example (written in Swedish in the chat):
 - If a push is rejected because main has changed: fetch the changes, run the tests again and push again. Never force a push through.
 
 ## AUTOMATIC MERGE TO MAIN
-- Do not add automatic merge if the project rules require review before main (e.g. a pull request approved by the user); then open a pull request and give the user a direct link to it.
+- Do not add automatic merge if the project rules require the user's approval before main (e.g. a pull request the user must approve); then open a pull request and give the user a direct link to it. A pull request the agent may merge itself does not count.
 - Otherwise, if the agent can only push to its own branch, the repo must have a GitHub Action (.github/workflows/auto-merge.yml) that, on push to the agent's branches, automatically merges them into main and triggers a new GitHub Pages build if the repo uses Pages.
 - The agent's own branches must always start with the prefix claude/, regardless of which agent is working, so they are merged automatically.
 - The prefix claude/ is only for the agent's temporary work branches. Branches with a lasting purpose (e.g. test, preview, release) must never start with claude/, so they are not merged automatically.
