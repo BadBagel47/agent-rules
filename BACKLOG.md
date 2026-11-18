@@ -11,6 +11,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 | ID | Status | Description | Source |
 |---|---|---|---|
 | AR-032 | Förslag | Slim the rules after 1.12 without changing their meaning (about 4,600 words): shorter wording, move rules to where they belong (e.g. documentation rules out of ON START), test against the repos before publishing. Consider at the same time a common backlog format and a shared backlog tool template (based on tools/backlog.mjs in critical). | Draft review, 2026-11-17 |
+| AR-034 | I utkast | Recurring web fixes (blue tap highlight and focus ring after taps; ugly, misplaced dropdown arrow) in a separate WEB.md read only in web projects, instead of lengthening AGENTS.md. | User, 2026-11-18 |
 
 ## Published / declined
 

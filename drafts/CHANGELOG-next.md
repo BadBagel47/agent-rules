@@ -1,0 +1,44 @@
+> **DRAFT – NOT IN EFFECT.** The changelog in effect is [CHANGELOG.md](../CHANGELOG.md).
+
+# Changelog – global agent rules
+
+- Unreleased:
+  - New WEB.md with web basics (no blue tap highlight, focus ring only for keyboard, own SVG arrow in dropdown menus), read only in web projects; one line in AGENTS.md points to it (AR-034).
+- 1.12 (2026-11-17):
+  - From the simulation: projects with fixed question series keep labels in the saved proposal; equivalent statuses for "Pågår" count; only a pull request the user must approve means test builds (AR-033).
+  - "Pågår" marks state the branch or session and are removed when done, parked or stopped; the saved run proposal is a snapshot; an agent only changes its own repo; a backlog tool named in the project's AGENTS.md is used (AR-031).
+  - IDs from other repos are written with the repo name in front; the repo's own IDs stay short; renamed repos keep the old name as an alias (AR-030).
+  - Run proposals gathered in their own section (RUN PROPOSALS), shorter and ordered as the agent works; fixed conflicts: "Kör alla" with open questions asks once, question labels are per chat, answers are recorded as decisions, groups building on something not ready are not ready, file names allowed for manual steps, the ten-line limit applies to result reports only (AR-029).
+  - Buttons only for runs; other questions as plain text (AR-025).
+  - At most about five questions per proposal, only for the top groups; the rest are saved and shown later, never skipped (AR-027).
+  - Run proposals start with a line stating what the order is based on; dependencies between groups are shown ("bygger på A") and respected (AR-028).
+  - Questions in run proposals get fixed labels Q1, Q2 … that do not follow group letters; lowest free number; project series take precedence (AR-026).
+- 1.11 (2026-11-17): Choices are shown as buttons when the environment supports it, otherwise as code blocks (AR-024).
+- 1.10 (2026-11-17):
+  - New REPLY FORMAT section near the top: plain words, no hashes/file names/metrics, report template of about ten lines, self-check before sending, before/after example (AR-021).
+  - Command "Regelkoll": confirm/re-read the latest rules and check the latest reply against them (AR-022).
+  - Open decisions are listed as questions with recommendations before a run; groups without a recommendation wait for an answer; "rek" approves the recommendations; plain "Kör" with open questions leads to a short question; new big decisions during a run stop that item (AR-023).
+- 1.9 (2026-11-15):
+  - Several agents in the same repo: "Pågår" marks, IDs pushed at once, rejected pushes are re-fetched and re-tested, letters refer to the own chat (AR-014).
+  - Unfinished work is pushed with [wip] and skipped by the auto-merge template, which repos update (AR-015).
+  - Deleting tracked files within approved work is covered by the go-ahead; untracked files, force push and rewritten history need an explicit yes (AR-016).
+  - A broken published site is restored at once (AR-017). Commits only as clickable links (AR-018). Version example written as vX.Y (AR-019).
+  - Run groups continue with AA, AB after Z; at most ten groups are shown at a time, and "Kör alla" covers only those shown (AR-020).
+- 1.8 (2026-11-15): If HANDOFF.md states a newer rules version than the agent has loaded (e.g. another agent updated the repo), the agent re-reads the rules and never changes the version note back (AR-013).
+- 1.7 (2026-11-14): The prefix claude/ is only for temporary work branches; branches with a lasting purpose (test, preview, release) must never use it, so they are not merged automatically (AR-012).
+- 1.6 (2026-11-13): Reports avoid technical details the user does not need (hashes, metrics, file names, internals) and state verification in plain words (AR-011).
+- 1.5 (2026-11-13): Run proposals: each ID line says what will be done and what it gives, not only the problem; also for single-ID groups (AR-010).
+- 1.4 (2026-11-12): Inventory first makes sure every remote branch is visible (AR-006). Template templates/archive-branches.yml for tagging branches before deletion when the agent cannot create tags (AR-007). Proposals to the rules get the ID prefix AR- (AR-008). Changelog moved to CHANGELOG.md and the rule-maintenance workflow to MAINTAINING.md, so AGENTS.md is shorter (AR-009).
+- 1.3 (2026-11-12): Safety principle at the top: nothing may be lost, irreversible actions need an explicit yes, unclear answers mean the safest option (AR-004). On conflicts, safe and independent changes required by the rules are done directly; the rest waits for the adaptation plan (AR-005).
+- 1.2 (2026-11-12): Exception for the agent-rules repo itself (AR-003); the confirmation line also states the version the repo followed before (AR-002); adaptation plan items are referred to as "punkt 1.1" in the chat (AR-001).
+- 1.1 (2026-11-12):
+  - Terms: global agent rules and project rules. Project rules live in the project's AGENTS.md below the reference (existing ones in HANDOFF.md may stay if linked); more specific project rules are kept; changes to them need approval.
+  - Adaptation plan with numbered items that can be approved or stopped individually; conflicting project rules shown with a recommendation; recorded decisions are not raised again.
+  - Inventory: fixed "Inventory" line, all branches (with enough history), PRs, Issues, publishing method, sensitive information and laws and regulations.
+  - Documentation: HANDOFF.md is current state (short log allowed) with a Decisions section; other documents, decision documents and separate bug/feature lists may be linked; HANDOFF.md and the backlog in root or docs/.
+  - Run groups: letters always from A for the latest list; parked items excluded from broad go-aheads; already done items reported separately; neutral model levels in saved documents.
+  - Publishing: changes published and verified after a run by default; optional test builds approved with "Publicera"; no automatic merge where review is required.
+  - Language: working documents accept Swedish and English without translation; existing product language is the project language.
+  - New: one-time actions to remove recurring manual steps; laws and regulations (Sweden and EU); check tools and permissions at start; never claim more than verified; IDs in chat with a short explanation.
+  - Rule changes go through a draft and a backlog (BACKLOG.md) and are published only on the user's explicit request; major versions only when existing content must be changed.
+- 1.0 (2026-11-11): First version.
