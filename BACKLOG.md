@@ -10,7 +10,7 @@ Proposals for changes to the global agent rules (AGENTS.md).
 
 | ID | Status | Description | Source |
 |---|---|---|---|
-| – | – | No open proposals | – |
+| AR-037 | I utkast | In repo cleanup, a request for the glass theme made the agent silently copy a private example artifact into the repo; none of the theme decisions followed, and later changes to the example do not reach the copy. Artifacts are design references; use the shared theme repo, or ask before a one-time copy and record its origin. | Theme agent via user, 2026-11-19 |
 
 ## Published / declined
 
