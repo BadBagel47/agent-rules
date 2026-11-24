@@ -3,6 +3,7 @@
 # Changelog – global agent rules
 
 - Unreleased:
+  - Language rule made its own prominent point: always answer in Swedish, also when everything read is in English and after a long session or a summary (AR-038).
   - WEB.md: Claude artifacts and example pages are design references, not the source of a theme; use the shared theme repo if it exists, otherwise ask before making a one-time copy and record its origin in HANDOFF.md (AR-037).
 - 1.14 (2026-11-18):
   - From the simulation: repos may extend the auto-merge template with checks before the merge; "Pending adaptation" triggers SETUP.md; old fully merged work branches are removed at session start (archive template deletes merged branches without a tag and can be triggered from a claude/ branch) (AR-036).
